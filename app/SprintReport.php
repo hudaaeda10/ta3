@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class SprintReport extends Model
 {
-    protected $tableName = 'sprint_report';
+    protected $table = 'sprint_reports';
 
     protected $fillable = ['waktu', 'keterangan', 'sprint_id'];
 

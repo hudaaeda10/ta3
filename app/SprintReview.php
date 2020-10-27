@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class SprintReview extends Model
 {
-    protected $tableName = 'sprint_review';
+    protected $table = 'sprint_reviews';
 
     protected $filable = ['review', 'status', 'sprint_report_id'];
 

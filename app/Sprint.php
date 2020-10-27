@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Sprint extends Model
 {
+    protected $table = 'sprints';
     protected $fillable = ['nama', 'tanggal_mulai', 'tanggal_akhir', 'persen', 'project_id'];
 
     public function project()

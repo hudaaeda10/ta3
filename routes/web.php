@@ -17,4 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('dashboard', 'HomeController@show');
+Route::get('dashboard', 'HomeController@show')->name('dashboard');
+Route::get('project', 'ProjectController@index')->name('project');
+Route::get('project/{projects}', 'SprintController@index');
+Route::get('sprint/{projects}/{idsprints}', 'SprintController@show');
+Route::get('task/store', 'TaskController@store')->route('task.store');
