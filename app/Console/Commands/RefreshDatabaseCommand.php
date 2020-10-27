@@ -11,14 +11,14 @@ class RefreshDatabaseCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'db:refresh';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'This commnad is usefull to refresh all database and seed to the default data';
 
     /**
      * Create a new command instance.
@@ -37,6 +37,8 @@ class RefreshDatabaseCommand extends Command
      */
     public function handle()
     {
-        return 0;
+        $this->call('migrate:refresh');
+        $this->call('db:seed');
+        $this->info('Database has been refresh migration and seed');
     }
 }

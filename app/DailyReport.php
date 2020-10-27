@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Daily_Report extends Model
+class DailyReport extends Model
 {
     protected $fillable = ['sprint_id ', 'mahasiswa_id', 'waktu', 'keterangan'];
 

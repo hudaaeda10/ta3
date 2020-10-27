@@ -16,6 +16,7 @@ class CreateSprintReportsTable extends Migration
         Schema::create('sprint_reports', function (Blueprint $table) {
             $table->id();
             $table->foreignId('sprint_id');
+            $table->foreignId('mahasiswa_id');
             $table->timestamp('waktu');
             $table->text('keterangan');
             $table->timestamps();
