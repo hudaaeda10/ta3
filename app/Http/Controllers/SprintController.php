@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\{Project, Sprint};
+use App\{Project, Sprint, Task};
 use Illuminate\Http\Request;
 
 class SprintController extends Controller
@@ -14,7 +14,11 @@ class SprintController extends Controller
 
     public function show(Project $project, $idsprints)
     {
-        $sprints = Sprint::find($idsprints);
-        return view('mahasiswa.sprint', compact('sprints'));
+        $sprint = Sprint::find($idsprints);
+        return view('mahasiswa.sprint', [
+            'sprint' => $sprint,
+            'task' => new Task(),
+            'sprints' => Sprint::get(),
+        ]);
     }
 }
