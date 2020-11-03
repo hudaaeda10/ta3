@@ -1,27 +1,35 @@
-<div class="clearfix"></div>
-<footer>
-    <div class="container-fluid">
-        <p class="copyright">&copy; 2017 <a href="https://www.themeineed.com" target="_blank">Theme I Need</a>. All Rights Reserved.</p>
+<footer class="main-footer">
+    <div class="footer-left">
+        Copyright &copy; 2018 <div class="bullet"></div> Design By <a href="https://nauval.in/">Muhamad Nauval Azhar</a>
+    </div>
+    <div class="footer-right">
+
     </div>
 </footer>
 </div>
-<!-- END WRAPPER -->
-<div class="clearfix"></div>
-<footer>
-    <div class="container-fluid">
-        <p class="copyright">&copy; 2017 <a href="https://www.themeineed.com" target="_blank">Theme I Need</a>. All Rights Reserved.</p>
-    </div>
-</footer>
 </div>
-<!-- END WRAPPER -->
-<!-- Javascript -->
-<script src="{{asset('admin/assets/vendor/jquery/jquery.min.js')}}"></script>
-<script src="{{asset('admin/assets/vendor/bootstrap/js/bootstrap.min.js')}}"></script>
-<script src="{{asset('admin/assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js')}}"></script>
-<script src="{{asset('admin/assets/scripts/klorofil-common.js')}}"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-<script src="{{asset('frontend/js/ckeditor.js')}}"></script>
+
+<!-- General JS Scripts -->
+<script src="/admin/assets/modules/jquery.min.js"></script>
+<script src="/admin/assets/modules/popper.js"></script>
+<script src="/admin/assets/modules/tooltip.js"></script>
+<script src="/admin/assets/modules/bootstrap/js/bootstrap.min.js"></script>
+<script src="/admin/assets/modules/nicescroll/jquery.nicescroll.min.js"></script>
+<script src="/admin/assets/modules/moment.min.js"></script>
+<script src="/admin/assets/js/stisla.js"></script>
+
+
+
+<!-- JS Libraies -->
+@stack('footermiddle')
+<!-- Page Specific JS File -->
+<script src="/admin/assets/js/page/index.js"></script>
+
+<!-- Template JS File -->
+<script src="/admin/assets/js/scripts.js"></script>
+<script src="/admin/assets/js/custom.js"></script>
+
+@stack('after-scripts')
 </body>
 
 </html>

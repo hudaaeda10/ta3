@@ -11,21 +11,21 @@ class Sprint extends Model
 
     public function project()
     {
-        return $this->belongsTo(Project::class);
+        return $this->belongsTo('App\Project');
     }
 
     public function tasks()
     {
-        return $this->hasMany(Task::class);
+        return $this->hasMany('App\Task', 'sprint_id');
     }
 
     public function sprintReports()
     {
-        return $this->hasMany(SprintReport::class);
+        return $this->hasMany('App\SprintReport', 'sprint_id');
     }
 
     public function dailyReports()
     {
-        return $this->hasMany(DailyReport::class);
+        return $this->hasMany('App\DailyReport', 'sprint_id');
     }
 }

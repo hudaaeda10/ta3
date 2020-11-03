@@ -12,6 +12,6 @@ class SprintReview extends Model
 
     public function sprintReport()
     {
-        $this->belongsTo(SprintReport::class);
+        $this->belongsTo('App\SprintReport');
     }
 }

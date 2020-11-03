@@ -1,0 +1,65 @@
+@extends('layouts.master')
+
+@section('content')
+<div class="section-header">
+    <h1>Edit Task</h1>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4>{{ $task->nama }}</h4>
+                <div class="card-header-action">
+                    <a href="{{ url()->previous() }}" class="btn btn-primary">Kembali</a>
+                </div>
+            </div>
+            <div class="card-body">
+                <form action="{{ route('task.update', $task->id) }}" method="post">
+                    {{ csrf_field() }}
+                    @method('put')
+
+                    <div class="form-group">
+                        <label for="sprint_id">Judul Sprint</label>
+                        <select name="sprint_id" id="task" class="form-control form-control-lg">
+                            @foreach($tugas as $key => $lastname)
+                            @if($task->sprint->nama == $lastname)
+                            <option selected value="{{ $key }}">{{ $task->sprint->nama }}</option>
+                            @else
+                            <option value="{{ $key }}">{{ $lastname }}</option>
+                            @endif
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nama">Nama Task</label>
+                        <input type="text" class="form-control" name="nama" placeholder="Nama Task" value="{{ $task->nama }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="deskripsi">Deskripsi</label>
+                        <textarea class="form-control" id="deskripsi" rows="3">{{ $task->deskripsi }}</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bobot">Bobot Task</label>
+                        <select class="form-control" name="bobot" id="bobot">
+                            <option value="{{$task->bobot}}" selected disabled>{{ $task->bobot}}</option>
+                            @foreach($bobots as $bobot)
+                            <option value="{{ $bobot}}">{{ $bobot }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="card-footer">
+                        <button class="btn btn-primary col-md-1">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+@stop

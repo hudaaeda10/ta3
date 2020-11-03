@@ -14,11 +14,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('dashboard');
 });
 
 Route::get('/dashboard', 'HomeController@show')->name('dashboard');
+
+// route ke project menuju sprint
 Route::get('/project', 'ProjectController@index')->name('project');
-Route::get('/project/{projects}', 'SprintController@index');
-Route::get('/sprint/{projects}/{idsprints}', 'SprintController@show');
-Route::post('/task/store', 'TaskController@store');
+Route::get('/project/{idproject}', 'ProjectController@show')->name('project.index');
+Route::get('/sprint/{idsprint}', 'ProjectController@tampil')->name('sprint.index');
+
+// Task CRUD
+Route::resource('/task', 'TaskController');

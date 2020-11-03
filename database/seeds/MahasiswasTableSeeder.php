@@ -15,6 +15,6 @@ class MahasiswasTableSeeder extends Seeder
             'nama' => 'Sakura',
             'nim' => '0110217089',
             'peran' => 'Developer',
-        ]);
+        ],);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Project;
+use App\{Project, Sprint, Task};
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -10,6 +10,30 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::all();
-        return view('mahasiswa.index', compact('projects'));
+        return view('project.index', compact('projects'));
+    }
+
+    public function show()
+    {
+        $sprints = Sprint::all();
+        return view('project.show', compact('sprints'));
+    }
+
+    public function tampil($idsprint)
+    {
+        $sprint = Sprint::findOrFail($idsprint);
+        $tasks = Task::with('sprint')->orderBy('status')->where('sprint_id', $idsprint)->get();
+
+        // tampilan persentasenya
+        $wl = Task::with('sprint')->orderBy('status')->where('sprint_id', $idsprint)->whereIn('status', ['1'])->count();
+        $total = Task::with('sprint')->orderBy('status')->where('sprint_id', $idsprint)->count();
+
+        if ($total != 0) {
+            $percent = round($wl / $total * 100);
+        } else {
+            $percent = 0;
+        }
+
+        return view('sprint.index', compact('sprint', 'tasks', 'percent'));
     }
 }

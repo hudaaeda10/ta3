@@ -11,11 +11,11 @@ class DailyReport extends Model
 
     public function mahasiswa()
     {
-        return $this->belongsTo(Mahasiswa::class);
+        return $this->belongsTo('App\Mahasiswa');
     }
 
     public function sprint()
     {
-        return $this->belongsTo(Sprint::class);
+        return $this->belongsTo('App\Sprint');
     }
 }

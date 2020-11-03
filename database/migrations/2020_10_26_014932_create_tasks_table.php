@@ -15,11 +15,14 @@ class CreateTasksTable extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('sprint_id');
+            $table->foreignId('sprint_id')->unsigned();
             $table->string('nama');
             $table->text('deskripsi');
+            $table->boolean('status');
             $table->enum('bobot', ['1', '3', '5', '7', '11']);
             $table->timestamps();
+
+            $table->foreign('sprint_id')->references('id')->on('sprints')->onDelete('cascade');
         });
     }
 

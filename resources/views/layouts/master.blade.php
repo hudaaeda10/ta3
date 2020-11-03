@@ -1,16 +1,12 @@
 @include('layouts.header')
 
 @include('layouts.sidebar')
-<!-- MAIN -->
-<div class="main">
-    <!-- MAIN CONTENT -->
-    <div class="main-content">
-        <div class="container-fluid">
-            <!-- OVERVIEW -->
-            @yield('content')
-        </div>
-    </div>
-    <!-- END MAIN CONTENT -->
+<!-- Main Content -->
+<div class="main-content">
+    <section class="section">
+        @yield('content')
+    </section>
+    @yield('modal')
 </div>
-<!-- END MAIN -->
+
 @include('layouts.footer')

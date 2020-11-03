@@ -12,16 +12,16 @@ class SprintReport extends Model
 
     public function sprint()
     {
-        return $this->belongsTo(Sprint::class);
+        return $this->belongsTo('App\Sprint');
     }
 
     public function sprintReview()
     {
-        return $this->belongsTo(SprintReview::class);
+        return $this->belongsTo('App\SprintReview', 'sprint_report_id');
     }
 
     public function mahasiswa()
     {
-        return $this->belongsTo(Mahasiswa::class);
+        return $this->belongsTo('App\Mahasiswa');
     }
 }

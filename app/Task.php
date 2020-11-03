@@ -7,10 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class Task extends Model
 {
     protected $table = 'tasks';
-    protected $fillable = ['nama', 'deskripsi', 'bobot', 'sprint_id'];
+    protected $fillable = ['sprint_id', 'nama', 'deskripsi', 'bobot', 'status'];
 
     public function sprint()
     {
-        return $this->belongsTo(Sprit::class);
+        return $this->belongsTo('App\Sprint');
+    }
+
+    public function mahasiswa()
+    {
+        return $this->belongsTo('App\Mahasiswa');
     }
 }

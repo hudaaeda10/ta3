@@ -15,12 +15,14 @@ class CreateSprintsTable extends Migration
     {
         Schema::create('sprints', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('project_id');
+            $table->foreignId('project_id')->unsigned();
             $table->string('nama');
             $table->date('tanggal_mulai');
             $table->date('tanggal_selesai');
             $table->float('persen');
             $table->timestamps();
+
+            $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
         });
     }
 

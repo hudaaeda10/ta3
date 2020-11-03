@@ -1,88 +1,258 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>Dashboard | Klorofil - Free Bootstrap Dashboard Template</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <!-- VENDOR CSS -->
-    <link rel="stylesheet" href="{{asset('admin/assets/vendor/bootstrap/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{asset('admin/assets/vendor/font-awesome/css/font-awesome.min.css')}}">
-    <link rel="stylesheet" href="{{asset('admin/assets/vendor/linearicons/style.css')}}">
-    <!-- MAIN CSS -->
-    <link rel="stylesheet" href="{{asset('admin/assets/css/main.css')}}">
-    <!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
-    <link rel="stylesheet" href="{{asset('admin/assets/css/demo.css')}}">
-    <!-- TOASTR -->
-    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-    <!-- GOOGLE FONTS -->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
-    <!-- ICONS -->
-    <link rel="apple-touch-icon" sizes="76x76" href="{{asset('admin/assets/img/apple-icon.png')}}">
-    <link rel="icon" type="image/png" sizes="96x96" href="{{asset('admin/assets/img/favicon.png')}}">
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+    <title>Ecommerce Dashboard &mdash; Stisla</title>
+
+    <!-- General CSS Files -->
+    <link rel="stylesheet" href="/admin/assets/modules/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/admin/assets/modules/fontawesome/css/all.min.css">
+
+    <!-- CSS Libraries -->
+    <link rel="stylesheet" href="/admin/assets/modules/jqvmap/dist/jqvmap.min.css">
+    <link rel="stylesheet" href="/admin/assets/modules/summernote/summernote-bs4.css">
+    <link rel="stylesheet" href="/admin/assets/modules/owlcarousel2/dist/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="/admin/assets/modules/owlcarousel2/dist/assets/owl.theme.default.min.css">
+
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="/admin/assets/css/style.css">
+    <link rel="stylesheet" href="/admin/assets/css/components.css">
+    <!-- Start GA -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-94034622-3');
+    </script>
+    <!-- /END GA -->
 </head>
 
 <body>
-    <!-- WRAPPER -->
-    <div id="wrapper">
-        <!-- NAVBAR -->
-        <nav class="navbar navbar-default navbar-fixed-top">
-            <div class="brand">
-                <a href="index.html"><img src="/admin/assets/img/logo-dark.png" alt="Klorofil Logo" class="img-responsive logo"></a>
-            </div>
-            <div class="container-fluid">
-                <div class="navbar-btn">
-                    <button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
-                </div>
-                <form class="navbar-form navbar-left">
-                    <div class="input-group">
-                        <input type="text" value="" class="form-control" placeholder="Search dashboard...">
-                        <span class="input-group-btn"><button type="button" class="btn btn-primary">Go</button></span>
+    <div id="app">
+        <div class="main-wrapper main-wrapper-1">
+            <div class="navbar-bg"></div>
+            <nav class="navbar navbar-expand-lg main-navbar">
+                <form class="form-inline mr-auto">
+                    <ul class="navbar-nav mr-3">
+                        <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
+                        <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="fas fa-search"></i></a></li>
+                    </ul>
+                    <div class="search-element">
+                        <input class="form-control" type="search" placeholder="Search" aria-label="Search" data-width="250">
+                        <button class="btn" type="submit"><i class="fas fa-search"></i></button>
+                        <div class="search-backdrop"></div>
+                        <div class="search-result">
+                            <div class="search-header">
+                                Histories
+                            </div>
+                            <div class="search-item">
+                                <a href="#">How to hack NASA using CSS</a>
+                                <a href="#" class="search-close"><i class="fas fa-times"></i></a>
+                            </div>
+                            <div class="search-item">
+                                <a href="#">Kodinger.com</a>
+                                <a href="#" class="search-close"><i class="fas fa-times"></i></a>
+                            </div>
+                            <div class="search-item">
+                                <a href="#">#Stisla</a>
+                                <a href="#" class="search-close"><i class="fas fa-times"></i></a>
+                            </div>
+                            <div class="search-header">
+                                Result
+                            </div>
+                            <div class="search-item">
+                                <a href="#">
+                                    <img class="mr-3 rounded" width="30" src="/admin//admin/assets/img/products/product-3-50.png" alt="product">
+                                    oPhone S9 Limited Edition
+                                </a>
+                            </div>
+                            <div class="search-item">
+                                <a href="#">
+                                    <img class="mr-3 rounded" width="30" src="assets/admin//img/products/product-2-50.png" alt="product">
+                                    Drone X2 New Gen-7
+                                </a>
+                            </div>
+                            <div class="search-item">
+                                <a href="#">
+                                    <img class="mr-3 rounded" width="30" src="/admin/assets/img/products/product-1-50.png" alt="product">
+                                    Headphone Blitz
+                                </a>
+                            </div>
+                            <div class="search-header">
+                                Projects
+                            </div>
+                            <div class="search-item">
+                                <a href="#">
+                                    <div class="search-icon bg-danger text-white mr-3">
+                                        <i class="fas fa-code"></i>
+                                    </div>
+                                    Stisla Admin Template
+                                </a>
+                            </div>
+                            <div class="search-item">
+                                <a href="#">
+                                    <div class="search-icon bg-primary text-white mr-3">
+                                        <i class="fas fa-laptop"></i>
+                                    </div>
+                                    Create a new Homepage Design
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </form>
-                <div class="navbar-btn navbar-btn-right">
-                    <a class="btn btn-success update-pro" href="https://www.themeineed.com/downloads/klorofil-pro-bootstrap-admin-dashboard-template/?utm_source=klorofil&utm_medium=template&utm_campaign=KlorofilPro" title="Upgrade to Pro" target="_blank"><i class="fa fa-rocket"></i> <span>UPGRADE TO PRO</span></a>
-                </div>
-                <div id="navbar-menu">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle icon-menu" data-toggle="dropdown">
-                                <i class="lnr lnr-alarm"></i>
-                                <span class="badge bg-danger">5</span>
+                <ul class="navbar-nav navbar-right">
+                    <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link nav-link-lg message-toggle beep"><i class="far fa-envelope"></i></a>
+                        <div class="dropdown-menu dropdown-list dropdown-menu-right">
+                            <div class="dropdown-header">Messages
+                                <div class="float-right">
+                                    <a href="#">Mark All As Read</a>
+                                </div>
+                            </div>
+                            <div class="dropdown-list-content dropdown-list-message">
+                                <a href="#" class="dropdown-item dropdown-item-unread">
+                                    <div class="dropdown-item-avatar">
+                                        <img alt="image" src="/admin/assets/img/avatar/avatar-1.png" class="rounded-circle">
+                                        <div class="is-online"></div>
+                                    </div>
+                                    <div class="dropdown-item-desc">
+                                        <b>Kusnaedi</b>
+                                        <p>Hello, Bro!</p>
+                                        <div class="time">10 Hours Ago</div>
+                                    </div>
+                                </a>
+                                <a href="#" class="dropdown-item dropdown-item-unread">
+                                    <div class="dropdown-item-avatar">
+                                        <img alt="image" src="/admin/assets/img/avatar/avatar-2.png" class="rounded-circle">
+                                    </div>
+                                    <div class="dropdown-item-desc">
+                                        <b>Dedik Sugiharto</b>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+                                        <div class="time">12 Hours Ago</div>
+                                    </div>
+                                </a>
+                                <a href="#" class="dropdown-item dropdown-item-unread">
+                                    <div class="dropdown-item-avatar">
+                                        <img alt="image" src="/admin/assets/img/avatar/avatar-3.png" class="rounded-circle">
+                                        <div class="is-online"></div>
+                                    </div>
+                                    <div class="dropdown-item-desc">
+                                        <b>Agung Ardiansyah</b>
+                                        <p>Sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                        <div class="time">12 Hours Ago</div>
+                                    </div>
+                                </a>
+                                <a href="#" class="dropdown-item">
+                                    <div class="dropdown-item-avatar">
+                                        <img alt="image" src="/admin/assets/img/avatar/avatar-4.png" class="rounded-circle">
+                                    </div>
+                                    <div class="dropdown-item-desc">
+                                        <b>Ardian Rahardiansyah</b>
+                                        <p>Duis aute irure dolor in reprehenderit in voluptate velit ess</p>
+                                        <div class="time">16 Hours Ago</div>
+                                    </div>
+                                </a>
+                                <a href="#" class="dropdown-item">
+                                    <div class="dropdown-item-avatar">
+                                        <img alt="image" src="/admin/assets/img/avatar/avatar-5.png" class="rounded-circle">
+                                    </div>
+                                    <div class="dropdown-item-desc">
+                                        <b>Alfa Zulkarnain</b>
+                                        <p>Exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>
+                                        <div class="time">Yesterday</div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="dropdown-footer text-center">
+                                <a href="#">View All <i class="fas fa-chevron-right"></i></a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg beep"><i class="far fa-bell"></i></a>
+                        <div class="dropdown-menu dropdown-list dropdown-menu-right">
+                            <div class="dropdown-header">Notifications
+                                <div class="float-right">
+                                    <a href="#">Mark All As Read</a>
+                                </div>
+                            </div>
+                            <div class="dropdown-list-content dropdown-list-icons">
+                                <a href="#" class="dropdown-item dropdown-item-unread">
+                                    <div class="dropdown-item-icon bg-primary text-white">
+                                        <i class="fas fa-code"></i>
+                                    </div>
+                                    <div class="dropdown-item-desc">
+                                        Template update is available now!
+                                        <div class="time text-primary">2 Min Ago</div>
+                                    </div>
+                                </a>
+                                <a href="#" class="dropdown-item">
+                                    <div class="dropdown-item-icon bg-info text-white">
+                                        <i class="far fa-user"></i>
+                                    </div>
+                                    <div class="dropdown-item-desc">
+                                        <b>You</b> and <b>Dedik Sugiharto</b> are now friends
+                                        <div class="time">10 Hours Ago</div>
+                                    </div>
+                                </a>
+                                <a href="#" class="dropdown-item">
+                                    <div class="dropdown-item-icon bg-success text-white">
+                                        <i class="fas fa-check"></i>
+                                    </div>
+                                    <div class="dropdown-item-desc">
+                                        <b>Kusnaedi</b> has moved task <b>Fix bug header</b> to <b>Done</b>
+                                        <div class="time">12 Hours Ago</div>
+                                    </div>
+                                </a>
+                                <a href="#" class="dropdown-item">
+                                    <div class="dropdown-item-icon bg-danger text-white">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                    </div>
+                                    <div class="dropdown-item-desc">
+                                        Low disk space. Let's clean it!
+                                        <div class="time">17 Hours Ago</div>
+                                    </div>
+                                </a>
+                                <a href="#" class="dropdown-item">
+                                    <div class="dropdown-item-icon bg-info text-white">
+                                        <i class="fas fa-bell"></i>
+                                    </div>
+                                    <div class="dropdown-item-desc">
+                                        Welcome to Stisla template!
+                                        <div class="time">Yesterday</div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="dropdown-footer text-center">
+                                <a href="#">View All <i class="fas fa-chevron-right"></i></a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                            <img alt="image" src="/admin/assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
+                            <div class="d-sm-none d-lg-inline-block">Hi, Ujang Maman</div>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <div class="dropdown-title">Logged in 5 min ago</div>
+                            <a href="features-profile.html" class="dropdown-item has-icon">
+                                <i class="far fa-user"></i> Profile
                             </a>
-                            <ul class="dropdown-menu notifications">
-                                <li><a href="#" class="notification-item"><span class="dot bg-warning"></span>System space is almost full</a></li>
-                                <li><a href="#" class="notification-item"><span class="dot bg-danger"></span>You have 9 unfinished tasks</a></li>
-                                <li><a href="#" class="notification-item"><span class="dot bg-success"></span>Monthly report is available</a></li>
-                                <li><a href="#" class="notification-item"><span class="dot bg-warning"></span>Weekly meeting in 1 hour</a></li>
-                                <li><a href="#" class="notification-item"><span class="dot bg-success"></span>Your request has been approved</a></li>
-                                <li><a href="#" class="more">See all notifications</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-question-circle"></i> <span>Help</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Basic Use</a></li>
-                                <li><a href="#">Working With Data</a></li>
-                                <li><a href="#">Security</a></li>
-                                <li><a href="#">Troubleshooting</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="/admin/assets/img/user.png" class="img-circle" alt="Avatar"> <span>Samuel</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#"><i class="lnr lnr-user"></i> <span>My Profile</span></a></li>
-                                <li><a href="#"><i class="lnr lnr-envelope"></i> <span>Message</span></a></li>
-                                <li><a href="#"><i class="lnr lnr-cog"></i> <span>Settings</span></a></li>
-                                <li><a href="#"><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
-                            </ul>
-                        </li>
-                        <!-- <li>
-							<a class="update-pro" href="https://www.themeineed.com/downloads/klorofil-pro-bootstrap-admin-dashboard-template/?utm_source=klorofil&utm_medium=template&utm_campaign=KlorofilPro" title="Upgrade to Pro" target="_blank"><i class="fa fa-rocket"></i> <span>UPGRADE TO PRO</span></a>
-						</li> -->
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <!-- END NAVBAR -->
+                            <a href="features-activities.html" class="dropdown-item has-icon">
+                                <i class="fas fa-bolt"></i> Activities
+                            </a>
+                            <a href="features-settings.html" class="dropdown-item has-icon">
+                                <i class="fas fa-cog"></i> Settings
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item has-icon text-danger">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>

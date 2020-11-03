@@ -11,11 +11,16 @@ class Mahasiswa extends Model
 
     public function sprintReports()
     {
-        return $this->hasMany(SprintReport::class);
+        return $this->hasMany('App\SprintReport', 'mahasiswa_id');
     }
 
     public function daillyReports()
     {
-        return $this->hasMany(DailyReport::class);
+        return $this->hasMany('App\DailyReport', 'mahasiswa_id');
+    }
+
+    public function tasks()
+    {
+        return $this->hasMany('App\Mahasuswa', 'mahasiswa_id');
     }
 }
