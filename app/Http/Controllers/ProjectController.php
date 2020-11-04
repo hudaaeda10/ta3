@@ -13,9 +13,9 @@ class ProjectController extends Controller
         return view('project.index', compact('projects'));
     }
 
-    public function show()
+    public function show($idproject)
     {
-        $sprints = Sprint::all();
+        $sprints = Sprint::where('project_id', $idproject)->get();
         return view('project.show', compact('sprints'));
     }
 
