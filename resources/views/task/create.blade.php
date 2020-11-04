@@ -28,6 +28,15 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="mahasiswa_id">Nama Mahasiswa</label>
+                        <select name="mahasiswa_id" id="task" class="form-control form-control-lg">
+                            @foreach($mahasiswa as $key => $name)
+                            <option value="{{ $key }}">{{ $name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
                         <label for="nama">Nama Task</label>
                         <input type="text" class="form-control" name="nama" placeholder="Nama Task" value="{{ old('$task->nama') }}">
                     </div>
@@ -44,13 +53,6 @@
                             @foreach($bobots as $bobot)
                             <option value="{{ $bobot}}">{{ $bobot }}</option>
                             @endforeach
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="status">status Task</label>
-                        <select name="status" id="status" class="form-control" name="status" id="status" value="{{ old('status')}}">
-                            <option value="0">Belum Selesai</option>
                         </select>
                     </div>
 

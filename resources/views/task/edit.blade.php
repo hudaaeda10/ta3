@@ -20,13 +20,26 @@
                     @method('put')
 
                     <div class="form-group">
-                        <label for="sprint_id">Judul Sprint</label>
+                        <label for="sprint_id">Nama Mahasiswa</label>
                         <select name="sprint_id" id="task" class="form-control form-control-lg">
                             @foreach($tugas as $key => $lastname)
                             @if($task->sprint->nama == $lastname)
                             <option selected value="{{ $key }}">{{ $task->sprint->nama }}</option>
                             @else
                             <option value="{{ $key }}">{{ $lastname }}</option>
+                            @endif
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mahasiswa_id">Judul Sprint</label>
+                        <select name="mahasiswa_id" id="task" class="form-control form-control-lg">
+                            @foreach($mahasiswa as $key => $name)
+                            @if($task->mahasiswa->nama == $name)
+                            <option selected value="{{ $key }}">{{ $task->mahasiswa->nama }}</option>
+                            @else
+                            <option value="{{ $key }}">{{ $name }}</option>
                             @endif
                             @endforeach
                         </select>

@@ -61,7 +61,7 @@
                                         Details
                                     </button>
                                     <a href="{{ route('task.edit', $task->id) }}" class="btn btn-warning">Edit</a>
-                                    <a href="#" data-id="{{ $task->id }}" class="btn btn-danger swal-confirm">
+                                    <a href="#" data-id="{{ $task->id }}" task-nama="{{ $task->nama }}" class="btn btn-danger swal-confirm">
                                         <form action="{{ route('task.destroy', $task->id) }}" id="delete{{ $task->id }}" method="POST">
                                             @csrf
                                             @method('delete')
@@ -120,14 +120,6 @@
                         </tr>
                         <tr>
                             <th scope="row">
-                                Status Task :
-                            </th>
-                            <td>
-                                <span class="font-weight-bold mb-0">{{ $task->status }}</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">
                                 Bobot Task :
                             </th>
                             <td>
@@ -167,9 +159,10 @@
 <script>
     $(".swal-confirm").click(function(e) {
         id = e.target.dataset.id;
+        var task_nama = $(this).attr('task-nama');
         swal({
-                title: 'Are you sure?' + id,
-                text: 'Once deleted, you will not be able to recover this imaginary file!',
+                title: 'Yakin Ingin Menghapus?',
+                text: 'Mau dihapus task dengan nama ' + task_nama + '??',
                 icon: 'warning',
                 buttons: true,
                 dangerMode: true,

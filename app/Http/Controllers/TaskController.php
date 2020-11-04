@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\{Sprint, Task};
+use App\{Sprint, Task, Mahasiswa};
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -25,8 +25,9 @@ class TaskController extends Controller
     public function create()
     {
         $task = Sprint::pluck('nama', 'id')->toArray();
+        $mahasiswa = Mahasiswa::pluck('nama', 'id')->toArray();
         $bobots = ['1', '3', '5', '7', '11'];
-        return view('task.create', compact('task', 'bobots'));
+        return view('task.create', compact('task', 'bobots', 'mahasiswa'));
     }
 
     /**
@@ -39,12 +40,13 @@ class TaskController extends Controller
     {
         Task::create([
             'sprint_id' => $request->sprint_id,
+            'mahasiswa_id' => $request->mahasiswa_id,
             'nama' => $request->nama,
             'deskripsi' => $request->deskripsi,
             'status' => false,
             'bobot' => $request->bobot,
         ]);
-        return redirect()->route('sprint.index')->back();
+        return redirect()->back();
     }
 
     /**
@@ -67,10 +69,11 @@ class TaskController extends Controller
     public function edit($id)
     {
         $tugas = Sprint::pluck('nama', 'id')->toArray();
+        $mahasiswa = Mahasiswa::pluck('nama', 'id')->toArray();
         $task = Task::find($id);
         $bobots = ['1', '3', '5', '7', '11'];
 
-        return view('task.edit', compact('tugas', 'task', 'bobots'));
+        return view('task.edit', compact('tugas', 'task', 'bobots', 'mahasiswa'));
     }
 
     /**
