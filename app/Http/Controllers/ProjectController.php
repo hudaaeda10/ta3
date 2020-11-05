@@ -15,8 +15,9 @@ class ProjectController extends Controller
 
     public function show($idproject)
     {
+        $project = Project::findOrFail($idproject);
         $sprints = Sprint::where('project_id', $idproject)->get();
-        return view('project.show', compact('sprints'));
+        return view('project.show', compact('sprints', 'project'));
     }
 
     public function tampil($idsprint)

@@ -11,7 +11,7 @@
             <div class="card-header">
                 <h4> Sprint Pada Prokect:</h4>
                 <div class="card-header-action">
-                    <a href="#" class="btn btn-primary">Laporan Sprint <i class="fas fa-chevron-right"></i></a>
+                    <a href="{{ route('laporan.sprint.index', $project->id)}}" class="btn btn-primary">Laporan Sprint <i class="fas fa-chevron-right"></i></a>
                 </div>
             </div>
             <div class="card-body">

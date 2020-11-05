@@ -2,16 +2,16 @@
 
 @section('content')
 <div class="section-header">
-    <h1>Laporan Daily di Tanggal : {{ $daily->created_at->format('d-M-Y H:i:s') }}</h1>
+    <h1>Laporan Sprint </h1>
 </div>
 
 <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="d-inline">Details Laporan {{ $daily->sprint->nama}}</h4>
+                <h4 class="d-inline">Details Laporan {{ $sprints->sprint->nama}}</h4>
                 <div class="card-header-action">
-                    <a href="{{ route('harian.index', $daily->sprint->id) }}" class="btn btn-primary">Kembali</a>
+                    <a href="#" class="btn btn-primary">Kembali</a>
                 </div>
             </div>
             <div class="card-body">
@@ -23,7 +23,7 @@
                                     Tanggal Laporan
                                 </th>
                                 <td>
-                                    <span class="h6 ">{{ $daily->created_at->format('d-M-Y H:i:s') }}</span>
+                                    <span class="h6 ">{{ $sprints->waktu }}</span>
                                 </td>
                             </tr>
                             <tr>
@@ -31,7 +31,7 @@
                                     Nama Sprint
                                 </th>
                                 <td>
-                                    <span class="h6">{{ $daily->sprint->nama }}</span>
+                                    <span class="h6">{{ $sprints->sprint->nama }}</span>
                                 </td>
                             </tr>
                             <tr>
@@ -39,7 +39,7 @@
                                     Nama Mahasiswa
                                 </th>
                                 <td>
-                                    <span class="h6">{{ $daily->Mahasiswa->nama }}</span>
+                                    <span class="h6">{{ $sprints->Mahasiswa->nama }}</span>
                                 </td>
                             </tr>
                             <tr>
@@ -47,7 +47,7 @@
                                     Task Yang dilaporkan
                                 </th>
                                 <td>
-                                    <span class="h6">{{ $daily->tugas }}</span>
+                                    <span class="h6">{{ $sprints->tugas }}</span>
                                 </td>
                             </tr>
                             <tr>
@@ -55,7 +55,7 @@
                                     Keterangan Laporan
                                 </th>
                                 <td>
-                                    <span class="h6">{{ $daily->keterangan }}</span>
+                                    <span class="h6">{{ $sprints->keterangan }}</span>
                                 </td>
                             </tr>
                         </tbody>

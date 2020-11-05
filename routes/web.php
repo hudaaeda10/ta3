@@ -38,4 +38,6 @@ Route::delete('laporan/harian/destroy{daily}', 'HarianController@destroy')->name
 
 
 // Laporan Sprint CRUD
-Route::get('laporan/sprint/{idproject}', 'LaporsprintController@index')->name('sprint.index');
+Route::get('laporan/sprint/{idproject}', 'LaporsprintController@index')->name('laporan.sprint.index');
+Route::get('laporan/sprints/{sprints}', 'LaporsprintController@show')->name('laporan.sprint.show');
+Route::delete('laporan/sprints/{sprints}', 'LaporsprintController@destroy')->name('laporan.sprint.destroy');
