@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class DailyReport extends Model
 {
     protected $table = 'daily_reports';
-    protected $fillable = ['sprint_id ', 'mahasiswa_id', 'waktu', 'keterangan'];
+    protected $fillable = ['sprint_id', 'mahasiswa_id', 'keterangan', 'tugas'];
 
     public function mahasiswa()
     {

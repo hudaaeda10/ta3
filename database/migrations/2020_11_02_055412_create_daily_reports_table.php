@@ -18,7 +18,6 @@ class CreateDailyReportsTable extends Migration
             $table->foreignId('sprint_id')->unsigned();
             $table->foreignId('mahasiswa_id')->unsigned();
             $table->text('tugas')->nullable();
-            $table->timestamp('waktu');
             $table->text('keterangan');
             $table->timestamps();
 

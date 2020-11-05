@@ -26,3 +26,16 @@ Route::get('/sprint/{idsprint}', 'ProjectController@tampil')->name('sprint.index
 
 // Task CRUD
 Route::resource('/task', 'TaskController');
+Route::get('/task/create/{idsprint}', 'TaskController@create')->name('task.create');
+
+//Laporan Harian CRUD
+Route::get('laporan/harian/{idsprint}', 'HarianController@index')->name('harian.index');
+Route::get('laporan/harian/show/{daily}', 'HarianController@show')->name('harian.show');
+Route::get('laporan/harian/create/{idsprint}', 'HarianController@create')->name('harian.create');
+Route::post('laporan/harian/create', 'HarianController@store')->name('harian.store');
+Route::get('laporan/harian/edit/{idsprint}/{iddaily}', 'HarianController@edit')->name('harian.edit');
+Route::delete('laporan/harian/destroy{daily}', 'HarianController@destroy')->name('harian.destroy');
+
+
+// Laporan Sprint CRUD
+Route::get('laporan/sprint/{idproject}', 'LaporsprintController@index')->name('sprint.index');

@@ -13,7 +13,10 @@
                 <div class="card-header-form">
                     <form>
                         <div class="input-group">
-                            <a href="{{ route('task.create')}}" class="btn btn-primary">Tambah Task</a>
+                            <div class="group-btn">
+                                <a href="{{route('harian.index', $sprint->id)}}" class="btn btn-warning">Laporan Harian </a>
+                                <a href="{{ route('task.create', $sprint->id)}}" class="btn btn-primary">Tambah Task</a>
+                            </div>
                             <input type="text" class="form-control" placeholder="Search">
                             <div class="input-group-btn">
                                 <button class="btn btn-primary"><i class="fas fa-search"></i></button>
@@ -44,7 +47,7 @@
                             <tr>
                                 <td>{{ $no++ }}</td>
                                 <td>{{ $task->nama}}</td>
-                                <td>{{Str::limit($task->deskripsi, 50, '.')}}</td>
+                                <td>{{ $task->deskripsi }}</td>
                                 <td>
                                     @if ($task->status == 0)
                                     <span class="badge badge-warning">Belum divalidasi</span>
@@ -57,9 +60,6 @@
                                 <td>{{ $task->mahasiswa->peran}}</td>
                                 <td>
                                     <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                                        Details
-                                    </button>
                                     <a href="{{ route('task.edit', $task->id) }}" class="btn btn-warning">Edit</a>
                                     <a href="#" data-id="{{ $task->id }}" task-nama="{{ $task->nama }}" class="btn btn-danger swal-confirm">
                                         <form action="{{ route('task.destroy', $task->id) }}" id="delete{{ $task->id }}" method="POST">
@@ -78,77 +78,9 @@
         </div>
     </div>
 </div>
+
 @stop
 
-@section('modal')
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <table class="table align-item-center">
-                    <tbody>
-                        <tr>
-                            <th scope="row">
-                                Sprint Ke :
-                            </th>
-                            <td>
-                                <span class="font-weight-bold mb-0">{{ $sprint->nama }}</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">
-                                Nama Task :
-                            </th>
-                            <td>
-                                <span class="font-weight-bold mb-0">{{ $task->nama }}</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">
-                                Deskripsi Task :
-                            </th>
-                            <td>
-                                <span class="font-weight-bold mb-0">{{ $task->deskripsi }}</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">
-                                Bobot Task :
-                            </th>
-                            <td>
-                                <span class="font-weight-bold mb-0">{{ $task->bobot }}</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">
-                                Mahasiswa :
-                            </th>
-                            <td>
-                                <span class="font-weight-bold mb-0">{{ $task->mahasiswa->nama}}</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">
-                                Peran :
-                            </th>
-                            <td>
-                                <span class="font-weight-bold mb-0">{{ $task->mahasiswa->peran}}</span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
-@stop
 
 @push('footermiddle')
 <script src="/admin/assets/modules/sweetalert/sweetalert.min.js"></script>

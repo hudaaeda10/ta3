@@ -22,7 +22,7 @@ class ProjectController extends Controller
     public function tampil($idsprint)
     {
         $sprint = Sprint::findOrFail($idsprint);
-        $tasks = Task::with('sprint')->orderBy('status')->where('sprint_id', $idsprint)->get();
+        $tasks = Task::with('sprint')->orderBy('id', 'ASC')->where('sprint_id', $idsprint)->paginate(10);
 
         // tampilan persentasenya
         $wl = Task::with('sprint')->orderBy('status')->where('sprint_id', $idsprint)->whereIn('status', ['1'])->count();

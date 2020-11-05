@@ -22,12 +22,13 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        $task = Sprint::pluck('nama', 'id')->toArray();
+        $sprint = Sprint::find($id);
+        // $task = Sprint::pluck('nama', 'id')->toArray();
         $mahasiswa = Mahasiswa::pluck('nama', 'id')->toArray();
         $bobots = ['1', '3', '5', '7', '11'];
-        return view('task.create', compact('task', 'bobots', 'mahasiswa'));
+        return view('task.create', compact('sprint', 'bobots', 'mahasiswa'));
     }
 
     /**
@@ -46,7 +47,7 @@ class TaskController extends Controller
             'status' => false,
             'bobot' => $request->bobot,
         ]);
-        return redirect()->back();
+        return redirect()->route('sprint.index', $request->sprint_id);
     }
 
     /**
@@ -83,11 +84,11 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Task $task)
+    public function update(Request $request, $id)
     {
-        $task->update($request->all());
-
-        return redirect()->back();
+        $data = Task::find($id);
+        $data->update($request->all());
+        return redirect()->route('sprint.index', $request->sprint_id);
     }
 
     /**
