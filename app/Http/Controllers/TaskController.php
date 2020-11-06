@@ -39,6 +39,15 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
+
+        $this->validate($request, [
+            'sprint_id' => 'required',
+            'mahasiswa_id' => 'required',
+            'nama' => 'required',
+            'deskripsi' => 'required',
+            'bobot' => 'required',
+        ]);
+
         Task::create([
             'sprint_id' => $request->sprint_id,
             'mahasiswa_id' => $request->mahasiswa_id,
@@ -47,6 +56,7 @@ class TaskController extends Controller
             'status' => false,
             'bobot' => $request->bobot,
         ]);
+        session()->flash('success', 'Task Telah Dibuat');
         return redirect()->route('sprint.index', $request->sprint_id);
     }
 
@@ -67,14 +77,14 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($idsprint, $idtask)
     {
+        $sprint = Sprint::findOrFail($idsprint);
         $tugas = Sprint::pluck('nama', 'id')->toArray();
         $mahasiswa = Mahasiswa::pluck('nama', 'id')->toArray();
-        $task = Task::find($id);
+        $task = Task::find($idtask);
         $bobots = ['1', '3', '5', '7', '11'];
-
-        return view('task.edit', compact('tugas', 'task', 'bobots', 'mahasiswa'));
+        return view('task.edit', compact('tugas', 'task', 'bobots', 'mahasiswa', 'sprint'));
     }
 
     /**
@@ -86,8 +96,15 @@ class TaskController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'sprint_id' => 'required',
+            'mahasiswa_id' => 'required',
+            'nama' => 'required',
+        ]);
+
         $data = Task::find($id);
         $data->update($request->all());
+        session()->flash('success', 'Task Telah di Update');
         return redirect()->route('sprint.index', $request->sprint_id);
     }
 

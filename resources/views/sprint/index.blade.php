@@ -5,6 +5,9 @@
     <h1>List Sprint</h1>
 </div>
 
+
+@include('layouts.alert')
+
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -60,7 +63,7 @@
                                 <td>{{ $task->mahasiswa->peran}}</td>
                                 <td>
                                     <!-- Button trigger modal -->
-                                    <a href="{{ route('task.edit', $task->id) }}" class="btn btn-warning">Edit</a>
+                                    <a href="{{ route('task.edit', [$sprint->id, $task->id]) }}" class="btn btn-warning">Edit</a>
                                     <a href="#" data-id="{{ $task->id }}" task-nama="{{ $task->nama }}" class="btn btn-danger swal-confirm">
                                         <form action="{{ route('task.destroy', $task->id) }}" id="delete{{ $task->id }}" method="POST">
                                             @csrf

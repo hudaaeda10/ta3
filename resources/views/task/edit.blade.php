@@ -11,7 +11,7 @@
             <div class="card-header">
                 <h4>{{ $task->nama }}</h4>
                 <div class="card-header-action">
-                    <a href="{{ url()->previous() }}" class="btn btn-primary">Kembali</a>
+                    <a href="{{ route('sprint.index', $sprint->id) }}" class="btn btn-primary">Kembali</a>
                 </div>
             </div>
             <div class="card-body">
@@ -30,6 +30,11 @@
                             @endif
                             @endforeach
                         </select>
+                        @error('sprint_id')
+                        <div class="text-danger">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
 
                     <div class="form-group">
@@ -43,16 +48,26 @@
                             @endif
                             @endforeach
                         </select>
+                        @error('mahasiswa_id')
+                        <div class="text-danger">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
 
                     <div class="form-group">
                         <label for="nama">Nama Task</label>
-                        <input type="text" class="form-control" name="nama" placeholder="Nama Task" value="{{ $task->nama }}">
+                        <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" placeholder="Nama Task" value="{{ $task->nama }}">
+                        @error('nama')
+                        <div class="text-danger">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
 
                     <div class="form-group">
                         <label for="deskripsi">Deskripsi</label>
-                        <textarea class="form-control" id="deskripsi" rows="3">{{ $task->deskripsi }}</textarea>
+                        <textarea class="form-control @error('deskripsi') is-invalid @enderror" id="deskripsi" rows="3">{{ $task->deskripsi }}</textarea>
                     </div>
 
                     <div class="form-group">
@@ -63,6 +78,11 @@
                             <option value="{{ $bobot}}">{{ $bobot }}</option>
                             @endforeach
                         </select>
+                        @error('bobot')
+                        <div class="text-danger">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
 
                     <div class="card-footer">

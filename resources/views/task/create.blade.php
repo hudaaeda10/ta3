@@ -11,7 +11,7 @@
             <div class="card-header">
                 <h4>Task Baru </h4>
                 <div class="card-header-action">
-                    <a href="{{ url()->previous() }}" class="btn btn-primary">Kembali</a>
+                    <a href="{{ route('sprint.index', $sprint->id) }}" class="btn btn-primary">Kembali</a>
                 </div>
             </div>
             <div class="card-body">
@@ -27,16 +27,27 @@
 
                     <div class="form-group">
                         <label for="mahasiswa_id">Nama Mahasiswa</label>
-                        <select name="mahasiswa_id" id="task" class="form-control form-control-lg">
+                        <select name="mahasiswa_id" id="task" class="form-control form-control-lg @error('mahasiswa_id') is-invalid @enderror">
+                            <option selected disabled>Pilih Nama Mahasiswa</option>
                             @foreach($mahasiswa as $key => $name)
                             <option value="{{ $key }}">{{ $name }}</option>
                             @endforeach
                         </select>
+                        @error('mahasiswa_id')
+                        <div class="text-danger">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
 
                     <div class="form-group">
                         <label for="nama">Nama Task</label>
-                        <input type="text" class="form-control" name="nama" placeholder="Nama Task" value="{{ old('$task->nama') }}">
+                        <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" placeholder="Nama Task" value="{{ old('$task->nama') }}">
+                        @error('nama')
+                        <div class="text-danger">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
 
                     <div class="form-group">

@@ -24,9 +24,11 @@ Route::get('/project', 'ProjectController@index')->name('project');
 Route::get('/project/{idproject}', 'ProjectController@show')->name('project.index');
 Route::get('/sprint/{idsprint}', 'ProjectController@tampil')->name('sprint.index');
 
+
 // Task CRUD
 Route::resource('/task', 'TaskController');
 Route::get('/task/create/{idsprint}', 'TaskController@create')->name('task.create');
+Route::get('/task/{idsprint}/{idtask}/edit', 'TaskController@edit')->name('task.edit');
 
 //Laporan Harian CRUD
 Route::get('laporan/harian/{idsprint}', 'HarianController@index')->name('harian.index');
