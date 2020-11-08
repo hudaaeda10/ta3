@@ -36,6 +36,7 @@ Route::get('laporan/harian/show/{daily}', 'HarianController@show')->name('harian
 Route::get('laporan/harian/create/{idsprint}', 'HarianController@create')->name('harian.create');
 Route::post('laporan/harian/create', 'HarianController@store')->name('harian.store');
 Route::get('laporan/harian/edit/{idsprint}/{iddaily}', 'HarianController@edit')->name('harian.edit');
+Route::put('laporan/harian/{iddaily}/update', 'HarianController@update')->name('harian.update');
 Route::delete('laporan/harian/destroy{daily}', 'HarianController@destroy')->name('harian.destroy');
 
 

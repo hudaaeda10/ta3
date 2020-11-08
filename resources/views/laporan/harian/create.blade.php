@@ -12,7 +12,7 @@
             <div class="card-header">
                 <h4>Laporan Harian Baru </h4>
                 <div class="card-header-action">
-                    <a href="{{ url()->previous() }}" class="btn btn-primary">Kembali</a>
+                    <a href="{{ route('harian.index', $sprint->id) }}" class="btn btn-primary">Kembali</a>
                 </div>
             </div>
             <div class="card-body">
@@ -34,16 +34,15 @@
                             @endforeach
                         </select>
                     </div>
+
                     <div class="form-group">
                         <label for="tugas">Task yang dilaporkan</label>
-                        <div class="form-check">
+                        <select name="tugas" class="form-control">
+                            <option selected disabled>Pilih Satu Task</option>
                             @foreach($tasks as $task)
-                            <input name="tugas[]" class="form-check-input" type="checkbox" value="{{ $task->nama}}">
-                            <label class="form-check-label" for="tugas">
-                                {{ $task->nama }}
-                            </label><br>
+                            <option value="{{ $task->nama}}">{{ $task->nama }}</option>
                             @endforeach
-                        </div>
+                        </select>
                     </div>
 
                     <div class="form-group">

@@ -33,16 +33,26 @@ class HarianController extends Controller
             'sprint_id' => $request->sprint_id,
             'mahasiswa_id' => $request->mahasiswa_id,
             'keterangan' => $request->keterangan,
+            'tugas' => $request->tugas,
         ]);
         return redirect()->route('harian.index', $request->sprint_id);
     }
 
     public function edit($idsprint, $iddaily)
     {
+        $tugas = Sprint::pluck('nama', 'id')->toArray();
+        $sprint = Sprint::findOrFail($idsprint);
         $mahasiswa = Mahasiswa::pluck('nama', 'id')->toArray();
         $tasks = Task::with('sprint')->where('sprint_id', $idsprint)->get();
         $daily = dailyReport::find($iddaily);
-        return view('laporan.harian.edit', compact('mahasiswa', 'tasks', 'daily'));
+        return view('laporan.harian.edit', compact('mahasiswa', 'tasks', 'daily', 'sprint', 'tugas'));
+    }
+
+    public function update(Request $request, $iddaily)
+    {
+        $data = dailyReport::find($iddaily);
+        $data->update($request->all());
+        return redirect()->route('harian.index', $request->sprint_id);
     }
 
     public function destroy(dailyReport $daily)

@@ -23,7 +23,7 @@
                                     Tanggal Laporan
                                 </th>
                                 <td>
-                                    <span class="h6 ">{{ $sprints->waktu }}</span>
+                                    <span class="h6 ">{{ $sprints->created_at->format('d-M-Y H:i:s') }}</span>
                                 </td>
                             </tr>
                             <tr>

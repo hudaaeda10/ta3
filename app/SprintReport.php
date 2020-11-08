@@ -8,7 +8,7 @@ class SprintReport extends Model
 {
     protected $table = 'sprint_reports';
 
-    protected $fillable = ['waktu', 'keterangan', 'sprint_id'];
+    protected $fillable = ['keterangan', 'sprint_id'];
 
     public function sprint()
     {

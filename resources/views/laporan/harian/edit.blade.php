@@ -11,13 +11,26 @@
             <div class="card-header">
                 <h4>Laporan Harian Baru </h4>
                 <div class="card-header-action">
-                    <a href="{{ url()->previous() }}" class="btn btn-primary">Kembali</a>
+                    <a href="{{ route('harian.index', $sprint->id) }}" class="btn btn-primary">Kembali</a>
                 </div>
             </div>
             <div class="card-body">
-                <form action="#" method="post">
+                <form action="{{ route('harian.update', $daily->id) }}" method="post">
                     {{ csrf_field() }}
-                    @method('put')
+                    @method('PUT')
+
+                    <div class="form-group">
+                        <label for="sprint_id">Judul Sprint</label>
+                        <select name="sprint_id" id="task" class="form-control form-control-lg">
+                            @foreach($tugas as $key => $lastname)
+                            @if($daily->sprint->nama == $lastname)
+                            <option selected value="{{ $key }}">{{ $daily->sprint->nama }}</option>
+                            @else
+                            <option value="{{ $key }}">{{ $lastname }}</option>
+                            @endif
+                            @endforeach
+                        </select>
+                    </div>
 
                     <div class="form-group">
                         <label for="mahasiswa_id">Nama Mahasiswa</label>
@@ -34,13 +47,13 @@
 
                     <div class="form-group">
                         <label for="tugas">Task yang dilaporkan</label>
-                        <select name="tugas[]" id="tugas" class="form-control form-control-lg">
+                        <select name="tugas" id="tugas" class="form-control form-control-lg">
                             @foreach($tasks as $task)
-                            <option selected value="{{$task->id}}">{{ $task->nama}}</option>
-                            @endforeach
-
-                            @foreach($tasks as $task)
-                            <option value="{{$task->id}}">{{ $task->nama}}</option>
+                            @if($daily->tugas == $task->nama)
+                            <option selected value="{{$daily->tugas}}">{{ $daily->tugas}}</option>
+                            @else
+                            <option value="{{$task->nama}}">{{ $task->nama}}</option>
+                            @endif
                             @endforeach
                         </select>
                     </div>

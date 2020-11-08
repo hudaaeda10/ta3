@@ -31,7 +31,7 @@
                                 <td>{{ $sprint->sprint->nama }}</td>
                                 <td>{{ $sprint->mahasiswa->nama}}</td>
                                 <td>{{ $sprint->tugas}}</td>
-                                <td>{{ $sprint->waktu}}</td>
+                                <td>{{ $sprint->created_at->format('d-M-Y H:i:s') }}</td>
                                 <td>{{ $sprint->keterangan}}</td>
                                 <td>
                                     <a href="{{route('laporan.sprint.show', $sprint->id)}}" class="btn btn-primary">Details</a>

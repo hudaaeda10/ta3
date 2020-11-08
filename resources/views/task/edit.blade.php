@@ -20,7 +20,7 @@
                     @method('put')
 
                     <div class="form-group">
-                        <label for="sprint_id">Nama Mahasiswa</label>
+                        <label for="sprint_id">Judul Sprint</label>
                         <select name="sprint_id" id="task" class="form-control form-control-lg">
                             @foreach($tugas as $key => $lastname)
                             @if($task->sprint->nama == $lastname)
@@ -38,7 +38,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="mahasiswa_id">Judul Sprint</label>
+                        <label for="mahasiswa_id">Nama Mahasiswa</label>
                         <select name="mahasiswa_id" id="task" class="form-control form-control-lg">
                             @foreach($mahasiswa as $key => $name)
                             @if($task->mahasiswa->nama == $name)
