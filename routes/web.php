@@ -42,5 +42,10 @@ Route::delete('laporan/harian/destroy{daily}', 'HarianController@destroy')->name
 
 // Laporan Sprint CRUD
 Route::get('laporan/sprint/{idproject}', 'LaporsprintController@index')->name('laporan.sprint.index');
-Route::get('laporan/sprints/{sprints}', 'LaporsprintController@show')->name('laporan.sprint.show');
+Route::get('laporan/sprints/{sprints}/{idproject}/show', 'LaporsprintController@show')->name('laporan.sprint.show');
+Route::get('laporan/sprint/{idproject}/create', 'LaporsprintController@create')->name('laporan.sprint.create');
+Route::post('laporan/sprint/store/{idproject}', 'LaporsprintController@store')->name('laporan.sprint.store');
+// idsprint disini itu adaalah sprint report
+Route::get('laporan/sprint/{idsprint}/{idproject}/edit', 'LaporsprintController@edit')->name('laporan.sprint.edit');
+Route::put('laporan/sprint/{idsprint}/{idproject}/update', 'LaporsprintController@store')->name('laporan.sprint.update');
 Route::delete('laporan/sprints/{sprints}', 'LaporsprintController@destroy')->name('laporan.sprint.destroy');

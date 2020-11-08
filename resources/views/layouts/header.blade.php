@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="/admin/assets/modules/summernote/summernote-bs4.css">
     <link rel="stylesheet" href="/admin/assets/modules/owlcarousel2/dist/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="/admin/assets/modules/owlcarousel2/dist/assets/owl.theme.default.min.css">
+    @stack('header')
 
     <!-- Template CSS -->
     <link rel="stylesheet" href="/admin/assets/css/style.css">

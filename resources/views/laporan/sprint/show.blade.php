@@ -11,7 +11,7 @@
             <div class="card-header">
                 <h4 class="d-inline">Details Laporan {{ $sprints->sprint->nama}}</h4>
                 <div class="card-header-action">
-                    <a href="#" class="btn btn-primary">Kembali</a>
+                    <a href="{{ route('laporan.sprint.index', $project->id)}}" class="btn btn-primary">Kembali</a>
                 </div>
             </div>
             <div class="card-body">
@@ -44,18 +44,10 @@
                             </tr>
                             <tr>
                                 <th scope="row">
-                                    Task Yang dilaporkan
-                                </th>
-                                <td>
-                                    <span class="h6">{{ $sprints->tugas }}</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
                                     Keterangan Laporan
                                 </th>
                                 <td>
-                                    <span class="h6">{{ $sprints->keterangan }}</span>
+                                    <span class="h6">{!! $sprints->keterangan !!}</span>
                                 </td>
                             </tr>
                         </tbody>

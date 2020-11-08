@@ -11,7 +11,7 @@
             <div class="card-header">
                 <h4 class="d-inline">Project {{ $project->nama }}</h4>
                 <div class="card-header-action">
-                    <a href="#" class="btn btn-primary">Tambah Laporan Sprint</a>
+                    <a href="{{ route('laporan.sprint.create', $project->id) }}" class="btn btn-primary">Tambah Laporan Sprint</a>
                 </div>
             </div>
             <div class="card-body">
@@ -21,7 +21,6 @@
                             <tr>
                                 <th>Nama Sprint</th>
                                 <th>Nama Mahasiswa</th>
-                                <th>Task Laporan</th>
                                 <th>Waktu Laporan</th>
                                 <th>Keterangan</th>
                                 <th>Action</th>
@@ -30,12 +29,11 @@
                             <tr>
                                 <td>{{ $sprint->sprint->nama }}</td>
                                 <td>{{ $sprint->mahasiswa->nama}}</td>
-                                <td>{{ $sprint->tugas}}</td>
                                 <td>{{ $sprint->created_at->format('d-M-Y H:i:s') }}</td>
-                                <td>{{ $sprint->keterangan}}</td>
+                                <td>{!! Str::limit($sprint->keterangan, 100) !!}</td>
                                 <td>
-                                    <a href="{{route('laporan.sprint.show', $sprint->id)}}" class="btn btn-primary">Details</a>
-                                    <a href="#" class="btn btn-warning">Edit</a>
+                                    <a href="{{route('laporan.sprint.show', [$sprint->id, $project->id]) }}" class="btn btn-primary">Details</a>
+                                    <a href="{{ route('laporan.sprint.edit', [$sprint->id, $project->id]) }}" class="btn btn-warning">Edit</a>
                                     <a href="#" data-id="{{ $sprint->id }}" sprint-nama="{{ $sprint->waktu }}" class="btn btn-danger swal-confirm">
                                         <form action="{{ route('laporan.sprint.destroy', $sprint->id) }}" id="delete{{ $sprint->id }}" method="POST">
                                             @csrf
