@@ -25,7 +25,6 @@ class TaskController extends Controller
     public function create($id)
     {
         $sprint = Sprint::find($id);
-        // $task = Sprint::pluck('nama', 'id')->toArray();
         $mahasiswa = Mahasiswa::pluck('nama', 'id')->toArray();
         $bobots = ['1', '3', '5', '7', '11'];
         return view('task.create', compact('sprint', 'bobots', 'mahasiswa'));

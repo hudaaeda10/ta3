@@ -47,5 +47,5 @@ Route::get('laporan/sprint/{idproject}/create', 'LaporsprintController@create')-
 Route::post('laporan/sprint/store/{idproject}', 'LaporsprintController@store')->name('laporan.sprint.store');
 // idsprint disini itu adaalah sprint report
 Route::get('laporan/sprint/{idsprint}/{idproject}/edit', 'LaporsprintController@edit')->name('laporan.sprint.edit');
-Route::put('laporan/sprint/{idsprint}/{idproject}/update', 'LaporsprintController@store')->name('laporan.sprint.update');
+Route::put('laporan/sprint/{idreport}/{idproject}/update', 'LaporsprintController@update')->name('laporan.sprint.update');
 Route::delete('laporan/sprints/{sprints}', 'LaporsprintController@destroy')->name('laporan.sprint.destroy');

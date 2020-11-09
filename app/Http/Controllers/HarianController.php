@@ -29,12 +29,20 @@ class HarianController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'sprint_id' => 'required',
+            'mahasiswa_id' => 'required',
+            'keterangan' => 'required',
+            'tugas' => 'required'
+        ]);
+
         dailyReport::create([
             'sprint_id' => $request->sprint_id,
             'mahasiswa_id' => $request->mahasiswa_id,
             'keterangan' => $request->keterangan,
             'tugas' => $request->tugas,
         ]);
+        session()->flash('success', 'Laporan Harian Telah Dibuat');
         return redirect()->route('harian.index', $request->sprint_id);
     }
 
@@ -45,6 +53,7 @@ class HarianController extends Controller
         $mahasiswa = Mahasiswa::pluck('nama', 'id')->toArray();
         $tasks = Task::with('sprint')->where('sprint_id', $idsprint)->get();
         $daily = dailyReport::find($iddaily);
+
         return view('laporan.harian.edit', compact('mahasiswa', 'tasks', 'daily', 'sprint', 'tugas'));
     }
 
@@ -52,6 +61,7 @@ class HarianController extends Controller
     {
         $data = dailyReport::find($iddaily);
         $data->update($request->all());
+        session()->flash('success', 'Laporan Harian Telah Diedit');
         return redirect()->route('harian.index', $request->sprint_id);
     }
 

@@ -3,7 +3,14 @@
 @section('content')
 <div class="section-header">
     <h1>Laporan Sprint</h1>
+    <div class="section-header-breadcrumb">
+        <div class="breadcrumb-item"><a href="{{ route('project') }}">Project</a></div>
+        <div class="breadcrumb-item active"><a href="{{ route('project.index', $project->id) }}">Sprint</a></div>
+        <div class="breadcrumb-item active"><a href="#">Laporan Sprint</a></div>
+    </div>
 </div>
+
+@include('layouts.alert')
 
 <div class="row">
     <div class="col-12">
@@ -34,7 +41,7 @@
                                 <td>
                                     <a href="{{route('laporan.sprint.show', [$sprint->id, $project->id]) }}" class="btn btn-primary">Details</a>
                                     <a href="{{ route('laporan.sprint.edit', [$sprint->id, $project->id]) }}" class="btn btn-warning">Edit</a>
-                                    <a href="#" data-id="{{ $sprint->id }}" sprint-nama="{{ $sprint->waktu }}" class="btn btn-danger swal-confirm">
+                                    <a href="#" data-id="{{ $sprint->id }}" sprint-nama="{{ $sprint->created_at }}" class="btn btn-danger swal-confirm">
                                         <form action="{{ route('laporan.sprint.destroy', $sprint->id) }}" id="delete{{ $sprint->id }}" method="POST">
                                             @csrf
                                             @method('delete')
@@ -67,7 +74,7 @@
         var sprint_nama = $(this).attr('sprint-nama');
         swal({
                 title: 'Yakin Ingin Menghapus Laporan Sprint?',
-                text: 'Mau dihapus task di tanggal ' + sprint_nama + '??',
+                text: 'Mau dihapus Laporan di tanggal ' + sprint_nama + '??',
                 icon: 'warning',
                 buttons: true,
                 dangerMode: true,

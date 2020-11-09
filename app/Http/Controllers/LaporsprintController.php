@@ -32,29 +32,36 @@ class LaporsprintController extends Controller
 
     public function store(Request $request, $idproject)
     {
+        $this->validate($request, [
+            'sprint_id' => 'required',
+            'mahasiswa_id' => 'required',
+        ]);
+
         $project = Project::findOrFail($idproject);
         $data = SprintReport::create([
             'sprint_id' => $request->sprint_id,
             'mahasiswa_id' => $request->mahasiswa_id,
             'keterangan' => $request->keterangan
         ]);
+        session()->flash('success', 'Laporan Sprint Telah Dibuat');
         return redirect()->route('laporan.sprint.index', $project->id);
     }
 
     public function edit($idsprint, $idproject)
     {
-        $project = SprintReport::findOrFail($idproject);
+        $project = Project::findOrFail($idproject);
         $report = SprintReport::findOrFail($idsprint);
         $sprints = Sprint::pluck('nama', 'id')->toArray();
         $mahasiswa = Mahasiswa::pluck('nama', 'id');
-        return view('laporan.sprint.edit', compact('project', 'report', 'sprints', 'mahasiswa'));
+        return view('laporan.sprint.edit', compact('report', 'project', 'sprints', 'mahasiswa'));
     }
 
-    public function update(Request $request, $idsprint, $idproject)
+    public function update(Request $request, $idreport, $idproject)
     {
         $project = Project::findOrFail($idproject);
-        $data = SprintReport::findOrFail($idsprint);
+        $data = SprintReport::findOrFail($idreport);
         $data->update($request->all());
+        session()->flash('success', 'Laporan Sprint Telah Di Edit');
         return redirect()->route('laporan.sprint.index', $project->id);
     }
 

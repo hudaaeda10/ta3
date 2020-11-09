@@ -26,15 +26,25 @@
                             <option value="{{ $sprint->id }}">{{ $sprint->nama }}</option>
                             @endforeach
                         </select>
+                        @error('sprint_id')
+                        <div class="text-danger">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
-
                     <div class="form-group">
                         <label for="mahasiswa_id">Nama Mahasiswa</label>
                         <select name="mahasiswa_id" id="task" class="form-control form-control-lg">
+                            <option disable selected>Pilih Nama</option>
                             @foreach($mahasiswa as $key => $name)
                             <option value="{{ $key }}">{{ $name }}</option>
                             @endforeach
                         </select>
+                        @error('mahasiswa_id')
+                        <div class="text-danger">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
 
                     <div class="form-group">

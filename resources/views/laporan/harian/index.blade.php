@@ -2,14 +2,22 @@
 
 @section('content')
 <div class="section-header">
-    <h1>Laporan Harian {{ $sprint->nama}}</h1>
+    <h1>Laporan Harian {{ $sprint->nama }} | {{ $sprint->project->nama }}</h1>
+    <div class="section-header-breadcrumb">
+        <div class="breadcrumb-item"><a href="{{ route('project') }}">Project</a></div>
+        <div class="breadcrumb-item"><a href="#">Sprint</a></div>
+        <div class="breadcrumb-item"><a href="{{ route('sprint.index', $sprint->id) }}">List Sprint</a></div>
+        <div class="breadcrumb-item active"><a href="#">Laporan Harian</a></div>
+    </div>
 </div>
+
+@include('layouts.alert')
 
 <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="d-inline">Tasks</h4>
+                <h4 class="d-inline">List Laporan Harian</h4>
                 <div class="card-header-action">
                     <a href="{{ route('harian.create', $sprint->id) }}" class="btn btn-primary">Tambah Laporan</a>
                 </div>

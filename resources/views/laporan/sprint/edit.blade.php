@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="card-body">
-                <form action="{{ route('laporan.sprint.update', [$report->id, $project->id])}}" method="post">
+                <form action="{{ route('laporan.sprint.update', [$report->id, $project->id]) }}" method="post">
                     {{ csrf_field() }}
                     @method('PUT')
 
@@ -30,6 +30,11 @@
                             @endif
                             @endforeach
                         </select>
+                        @error('sprint_id')
+                        <div class="text-danger">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
 
                     <div class="form-group">
@@ -43,11 +48,21 @@
                             @endif
                             @endforeach
                         </select>
+                        @error('mahasiswa_id')
+                        <div class="text-danger">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
 
                     <div class="form-group">
                         <label for="keterangan">Keterangan</label>
                         <textarea name="keterangan" class="summernote form-control" id="keterangan" rows="3">{!! $report->keterangan !!}</textarea>
+                        @error('keterangan')
+                        <div class="text-danger">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
 
                     <div class="card-footer">
