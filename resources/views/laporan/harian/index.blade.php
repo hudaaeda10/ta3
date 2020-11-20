@@ -5,8 +5,8 @@
     <h1>Laporan Harian {{ $sprint->nama }} | {{ $sprint->project->nama }}</h1>
     <div class="section-header-breadcrumb">
         <div class="breadcrumb-item"><a href="{{ route('project') }}">Project</a></div>
-        <div class="breadcrumb-item"><a href="#">Sprint</a></div>
-        <div class="breadcrumb-item"><a href="{{ route('sprint.index', $sprint->id) }}">List Sprint</a></div>
+        <div class="breadcrumb-item"><a href="{{ route('project', $project->id)}}">Sprint</a></div>
+        <div class="breadcrumb-item"><a href="{{ route('sprint.index', [$project->id,$sprint->id]) }}">List Sprint</a></div>
         <div class="breadcrumb-item active"><a href="#">Laporan Harian</a></div>
     </div>
 </div>
@@ -19,7 +19,7 @@
             <div class="card-header">
                 <h4 class="d-inline">List Laporan Harian</h4>
                 <div class="card-header-action">
-                    <a href="{{ route('harian.create', $sprint->id) }}" class="btn btn-primary">Tambah Laporan</a>
+                    <a href="{{ route('harian.create', [$project->id, $sprint->id]) }}" class="btn btn-primary">Tambah Laporan</a>
                 </div>
             </div>
             <div class="card-body">
@@ -42,8 +42,8 @@
                                 <td>{{ $daily->created_at->format('d-M-Y H:i:s') }}</td>
                                 <td>{{ $daily->keterangan }}</td>
                                 <td>
-                                    <a href="{{ route('harian.show', $daily->id) }}" class="btn btn-primary">Details</a>
-                                    <a href="/laporan/harian/edit/{{ $sprint->id }}/{{ $daily->id}}" class="btn btn-warning">Edit</a>
+                                    <a href="{{ route('harian.show', [$project->id, $sprint->id, $daily->id]) }}" class="btn btn-primary">Details</a>
+                                    <a href="{{ route('harian.edit', [$project->id, $sprint->id, $daily->id]) }}" class="btn btn-warning">Edit</a>
                                     <a href="#" data-id="{{ $daily->id }}" daily-nama="{{ $daily->created_at->format('d-M-Y') }}" class="btn btn-danger swal-confirm">
                                         <form action="{{ route('harian.destroy', $daily->id) }}" id="delete{{ $daily->id }}" method="POST">
                                             @csrf

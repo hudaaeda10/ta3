@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\{Sprint, Task, Mahasiswa};
+use App\{Sprint, Task, Mahasiswa, Project};
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -22,12 +22,13 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
+    public function create($idproject, $idsprint)
     {
-        $sprint = Sprint::find($id);
+        $project = Project::findOrFail($idproject);
+        $sprint = Sprint::findOrFail($idsprint);
         $mahasiswa = Mahasiswa::pluck('nama', 'id')->toArray();
         $bobots = ['1', '3', '5', '7', '11'];
-        return view('task.create', compact('sprint', 'bobots', 'mahasiswa'));
+        return view('task.create', compact('sprint', 'bobots', 'mahasiswa', 'project'));
     }
 
     /**
@@ -36,9 +37,10 @@ class TaskController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $idproject, $idsprint)
     {
-
+        $project = Project::findOrFail($idproject);
+        $sprint = Sprint::findOrFail($idsprint);
         $this->validate($request, [
             'sprint_id' => 'required',
             'mahasiswa_id' => 'required',
@@ -56,7 +58,7 @@ class TaskController extends Controller
             'bobot' => $request->bobot,
         ]);
         session()->flash('success', 'Task Telah Dibuat');
-        return redirect()->route('sprint.index', $request->sprint_id);
+        return redirect()->route('sprint.index', [$project, $sprint]);
     }
 
     /**
@@ -76,14 +78,16 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($idsprint, $idtask)
+    public function edit($idproject, $idsprint, $idtask)
     {
+        $project = Project::findOrFail($idproject);
         $sprint = Sprint::findOrFail($idsprint);
-        $tugas = Sprint::pluck('nama', 'id')->toArray();
+        $tugass = Sprint::with('project')->where('project_id', $idproject)->get();
         $mahasiswa = Mahasiswa::pluck('nama', 'id')->toArray();
         $task = Task::find($idtask);
         $bobots = ['1', '3', '5', '7', '11'];
-        return view('task.edit', compact('tugas', 'task', 'bobots', 'mahasiswa', 'sprint'));
+
+        return view('task.edit', compact('tugass', 'task', 'bobots', 'mahasiswa', 'sprint', 'project'));
     }
 
     /**
@@ -93,18 +97,20 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $idproject, $idsprint, $idtask)
     {
+        $project = Project::findOrFail($idproject);
+        $sprint = Sprint::findOrFail($idsprint);
         $this->validate($request, [
             'sprint_id' => 'required',
             'mahasiswa_id' => 'required',
             'nama' => 'required',
         ]);
 
-        $data = Task::find($id);
+        $data = Task::find($idtask);
         $data->update($request->all());
         session()->flash('success', 'Task Telah di Update');
-        return redirect()->route('sprint.index', $request->sprint_id);
+        return redirect()->route('sprint.index', [$project, $sprint]);
     }
 
     /**

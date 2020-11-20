@@ -20,7 +20,7 @@
             </div>
             <div class="card-body">
                 @foreach($sprints as $sprint)
-                <a href="{{ route('sprint.index', $sprint->id)}}" class="btn btn-lg btn-primary col-md-12">{{ $sprint->nama}}</a>
+                <a href="{{ route('sprint.index', [$project->id, $sprint->id])}}" class="btn btn-lg btn-primary col-md-12">{{ $sprint->nama}}</a>
                 <br><br><br>
                 @endforeach
             </div>

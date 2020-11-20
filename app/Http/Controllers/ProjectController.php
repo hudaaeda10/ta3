@@ -20,8 +20,9 @@ class ProjectController extends Controller
         return view('project.show', compact('sprints', 'project'));
     }
 
-    public function tampil($idsprint)
+    public function tampil($idproject, $idsprint)
     {
+        $project = Project::findOrFail($idproject);
         $sprint = Sprint::findOrFail($idsprint);
         $tasks = Task::with('sprint')->orderBy('id', 'ASC')->where('sprint_id', $idsprint)->paginate(10);
 
@@ -35,6 +36,6 @@ class ProjectController extends Controller
             $percent = 0;
         }
 
-        return view('sprint.index', compact('sprint', 'tasks', 'percent'));
+        return view('sprint.index', compact('sprint', 'tasks', 'percent', 'project'));
     }
 }

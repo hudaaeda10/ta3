@@ -11,11 +11,11 @@
             <div class="card-header">
                 <h4>Task Baru </h4>
                 <div class="card-header-action">
-                    <a href="{{ route('sprint.index', $sprint->id) }}" class="btn btn-primary">Kembali</a>
+                    <a href="{{ route('sprint.index', [$project->id, $sprint->id]) }}" class="btn btn-primary">Kembali</a>
                 </div>
             </div>
             <div class="card-body">
-                <form action="{{ route('task.store') }}" method="post">
+                <form action="{{ route('task.store',[$project->id,$sprint->id]) }}" method="post">
                     {{ csrf_field() }}
 
                     <div class="form-group">

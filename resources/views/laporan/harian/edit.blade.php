@@ -11,23 +11,19 @@
             <div class="card-header">
                 <h4>Edit Laporan Harian</h4>
                 <div class="card-header-action">
-                    <a href="{{ route('harian.index', $sprint->id) }}" class="btn btn-primary">Kembali</a>
+                    <a href="{{ route('harian.index', [$project->id,$sprint->id]) }}" class="btn btn-primary">Kembali</a>
                 </div>
             </div>
             <div class="card-body">
-                <form action="{{ route('harian.update', $daily->id) }}" method="post">
+                <form action="{{ route('harian.update', [$project->id, $sprint->id, $daily->id]) }}" method="post">
                     {{ csrf_field() }}
                     @method('PUT')
 
                     <div class="form-group">
                         <label for="sprint_id">Judul Sprint</label>
-                        <select name="sprint_id" id="task" class="form-control form-control-lg">
-                            @foreach($tugas as $key => $lastname)
-                            @if($daily->sprint->nama == $lastname)
-                            <option selected value="{{ $key }}">{{ $daily->sprint->nama }}</option>
-                            @else
-                            <option value="{{ $key }}">{{ $lastname }}</option>
-                            @endif
+                        <select name="sprint_id" id="sprint" class="form-control form-control-lg">
+                            @foreach($tugass as $tugas)
+                            <option {{ $tugas->id == $sprint->id ? 'selected' : ''}} value="{{ $tugas->id }}">{{ $tugas->nama }}</option>
                             @endforeach
                         </select>
                     </div>

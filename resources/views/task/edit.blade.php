@@ -11,23 +11,19 @@
             <div class="card-header">
                 <h4>{{ $task->nama }}</h4>
                 <div class="card-header-action">
-                    <a href="{{ route('sprint.index', $sprint->id) }}" class="btn btn-primary">Kembali</a>
+                    <a href="{{ route('sprint.index', [$project->id,$sprint->id]) }}" class="btn btn-primary">Kembali</a>
                 </div>
             </div>
             <div class="card-body">
-                <form action="{{ route('task.update', $task->id) }}" method="post">
+                <form action="{{ route('task.update', [$project->id,$sprint->id,$task->id]) }}" method="post">
                     {{ csrf_field() }}
                     @method('put')
 
                     <div class="form-group">
                         <label for="sprint_id">Judul Sprint</label>
                         <select name="sprint_id" id="task" class="form-control form-control-lg">
-                            @foreach($tugas as $key => $lastname)
-                            @if($task->sprint->nama == $lastname)
-                            <option selected value="{{ $key }}">{{ $task->sprint->nama }}</option>
-                            @else
-                            <option value="{{ $key }}">{{ $lastname }}</option>
-                            @endif
+                            @foreach($tugass as $tugas)
+                            <option {{ $tugas->id == $sprint->id ? 'selected' : ''}} value="{{ $tugas->id }}">{{ $tugas->nama }}</option>
                             @endforeach
                         </select>
                         @error('sprint_id')

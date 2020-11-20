@@ -17,11 +17,13 @@ class CreateSprintReportsTable extends Migration
             $table->id();
             $table->foreignId('sprint_id')->unsigned();
             $table->foreignId('mahasiswa_id')->unsigned();
+            $table->foreignId('project_id')->unsigned();
             $table->text('keterangan');
             $table->timestamps();
 
             $table->foreign('sprint_id')->references('id')->on('sprints')->onDelete('cascade');
             $table->foreign('mahasiswa_id')->references('id')->on('mahasiswas')->onDelete('cascade');
+            $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
         });
     }
 

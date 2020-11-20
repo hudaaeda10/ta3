@@ -11,7 +11,7 @@
             <div class="card-header">
                 <h4 class="d-inline">Details Laporan {{ $daily->sprint->nama}}</h4>
                 <div class="card-header-action">
-                    <a href="{{ route('harian.index', $daily->sprint->id) }}" class="btn btn-primary">Kembali</a>
+                    <a href="{{ route('harian.index', [$project->id, $sprint->id]) }}" class="btn btn-primary">Kembali</a>
                 </div>
             </div>
             <div class="card-body">

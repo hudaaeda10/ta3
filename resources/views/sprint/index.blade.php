@@ -5,8 +5,8 @@
     <h1>List Sprint</h1>
     <div class="section-header-breadcrumb">
         <div class="breadcrumb-item"><a href="{{ route('project') }}">Project</a></div>
-        <div class="breadcrumb-item active"><a href="#">Sprint</a></div>
-        <div class="breadcrumb-item active"><a href="{{ route('sprint.index', $sprint->id) }}">List Sprint</a></div>
+        <div class="breadcrumb-item active"><a href="{{ route('project.index', [$project->id]) }}">Sprint</a></div>
+        <div class="breadcrumb-item active"><a href="{{ route('sprint.index', [$project->id, $sprint->id]) }}">List Sprint</a></div>
     </div>
 </div>
 
@@ -21,8 +21,8 @@
                     <form>
                         <div class="input-group">
                             <div class="group-btn">
-                                <a href="{{route('harian.index', $sprint->id)}}" class="btn btn-warning">Laporan Harian </a>
-                                <a href="{{ route('task.create', $sprint->id)}}" class="btn btn-primary">Tambah Task</a>
+                                <a href="{{route('harian.index',[$project->id, $sprint->id])}}" class="btn btn-warning">Laporan Harian </a>
+                                <a href="{{ route('task.create', [$project->id, $sprint->id])}}" class="btn btn-primary">Tambah Task</a>
                             </div>
                             <input type="text" class="form-control" placeholder="Search">
                             <div class="input-group-btn">
@@ -67,7 +67,7 @@
                                 <td>{{ $task->mahasiswa->peran}}</td>
                                 <td>
                                     <!-- Button trigger modal -->
-                                    <a href="{{ route('task.edit', [$sprint->id, $task->id]) }}" class="btn btn-warning">Edit</a>
+                                    <a href="{{ route('task.edit', [$project->id,$sprint->id,$task->id]) }}" class="btn btn-warning">Edit</a>
                                     <a href="#" data-id="{{ $task->id }}" task-nama="{{ $task->nama }}" class="btn btn-danger swal-confirm">
                                         <form action="{{ route('task.destroy', $task->id) }}" id="delete{{ $task->id }}" method="POST">
                                             @csrf

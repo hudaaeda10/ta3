@@ -22,21 +22,23 @@ Route::get('/dashboard', 'HomeController@show')->name('dashboard');
 // route ke project menuju sprint
 Route::get('/project', 'ProjectController@index')->name('project');
 Route::get('/project/{idproject}', 'ProjectController@show')->name('project.index');
-Route::get('/sprint/{idsprint}', 'ProjectController@tampil')->name('sprint.index');
+Route::get('/sprint/{idproject}/{idsprint}', 'ProjectController@tampil')->name('sprint.index');
 
 
 // Task CRUD
 Route::resource('/task', 'TaskController');
-Route::get('/task/create/{idsprint}', 'TaskController@create')->name('task.create');
-Route::get('/task/{idsprint}/{idtask}/edit', 'TaskController@edit')->name('task.edit');
+Route::post('/task/store/{idproject}/{idsprint}', 'TaskController@store')->name('task.store');
+Route::get('/task/create/{idproject}/{idsprint}', 'TaskController@create')->name('task.create');
+Route::get('/task/edit/{idproject}/{idsprint}/{idtask}', 'TaskController@edit')->name('task.edit');
+Route::put('/task/update/{idproject}/{idsprint}/{idtask}', 'TaskController@update')->name('task.update');
 
 //Laporan Harian CRUD
-Route::get('laporan/harian/{idsprint}', 'HarianController@index')->name('harian.index');
-Route::get('laporan/harian/show/{daily}', 'HarianController@show')->name('harian.show');
-Route::get('laporan/harian/create/{idsprint}', 'HarianController@create')->name('harian.create');
-Route::post('laporan/harian/create', 'HarianController@store')->name('harian.store');
-Route::get('laporan/harian/edit/{idsprint}/{iddaily}', 'HarianController@edit')->name('harian.edit');
-Route::put('laporan/harian/{iddaily}/update', 'HarianController@update')->name('harian.update');
+Route::get('laporan/harian/{idproject}/{idsprint}', 'HarianController@index')->name('harian.index');
+Route::get('laporan/harian/show/{idproject}/{idsprint}/{iddaily}', 'HarianController@show')->name('harian.show');
+Route::get('laporan/harian/create/{idproject}/{idsprint}', 'HarianController@create')->name('harian.create');
+Route::post('laporan/harian/store/{idproject}/{idsprint}', 'HarianController@store')->name('harian.store');
+Route::get('laporan/harian/edit/{idproject}/{idsprint}/{iddaily}', 'HarianController@edit')->name('harian.edit');
+Route::put('laporan/harian/update/{idproject}/{idsprint}/{iddaily}', 'HarianController@update')->name('harian.update');
 Route::delete('laporan/harian/destroy{daily}', 'HarianController@destroy')->name('harian.destroy');
 
 

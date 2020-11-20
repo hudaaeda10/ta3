@@ -10,7 +10,7 @@ class LaporsprintController extends Controller
     public function index($idproject)
     {
         $project = Project::findOrFail($idproject);
-        $sprints = SprintReport::all();
+        $sprints = SprintReport::with('project')->where('project_id', $idproject)->get();
         // $sprints = Sprint::with('project')->where('project_id', $idproject)->get();
 
         return view('laporan.sprint.index', compact('sprints', 'project'));
@@ -39,6 +39,7 @@ class LaporsprintController extends Controller
 
         $project = Project::findOrFail($idproject);
         $data = SprintReport::create([
+            'project_id' => $idproject,
             'sprint_id' => $request->sprint_id,
             'mahasiswa_id' => $request->mahasiswa_id,
             'keterangan' => $request->keterangan
@@ -51,8 +52,9 @@ class LaporsprintController extends Controller
     {
         $project = Project::findOrFail($idproject);
         $report = SprintReport::findOrFail($idsprint);
-        $sprints = Sprint::pluck('nama', 'id')->toArray();
+        $sprints = Sprint::with('project')->where('project_id', $idproject)->get();
         $mahasiswa = Mahasiswa::pluck('nama', 'id');
+        // dd($valueselected);
         return view('laporan.sprint.edit', compact('report', 'project', 'sprints', 'mahasiswa'));
     }
 

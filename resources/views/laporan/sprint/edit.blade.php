@@ -21,15 +21,12 @@
 
                     <div class="form-group">
                         <label for="sprint_id">Judul Sprint</label>
-                        <select name="sprint_id" id="task" class="form-control form-control-lg">
-                            @foreach($sprints as $key => $lastname)
-                            @if($report->sprint->nama == $lastname)
-                            <option selected value="{{ $key }}">{{ $report->sprint->nama }}</option>
-                            @else
-                            <option value="{{ $key }}">{{ $lastname }}</option>
-                            @endif
+                        <select name="sprint_id" id="sprint" class="form-control form-control-lg">
+                            @foreach($sprints as $sprint)
+                            <option {{ $sprint->id == $report->sprint_id ? 'selected' : ''}} value="{{ $sprint->id }}">{{ $sprint->nama }}</option>
                             @endforeach
                         </select>
+
                         @error('sprint_id')
                         <div class="text-danger">
                             {{ $message }}
