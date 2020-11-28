@@ -51,3 +51,5 @@ Route::post('laporan/sprint/store/{idproject}', 'LaporsprintController@store')->
 Route::get('laporan/sprint/{idsprint}/{idproject}/edit', 'LaporsprintController@edit')->name('laporan.sprint.edit');
 Route::put('laporan/sprint/{idreport}/{idproject}/update', 'LaporsprintController@update')->name('laporan.sprint.update');
 Route::delete('laporan/sprints/{sprints}', 'LaporsprintController@destroy')->name('laporan.sprint.destroy');
+// Untuk Scrum Master Feedback
+Route::post('laporan/sprint/feedback/{idsprint}', 'LaporsprintController@feedback')->name('laporan.sprint.feedback');

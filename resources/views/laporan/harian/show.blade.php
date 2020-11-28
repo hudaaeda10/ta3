@@ -23,7 +23,7 @@
                                     Tanggal Laporan
                                 </th>
                                 <td>
-                                    <span class="h6 ">{{ $daily->created_at->format('d-M-Y H:i:s') }}</span>
+                                    <span class="h6 ">{{ $daily->created_at->format('d-M-Y H:i') }}</span>
                                 </td>
                             </tr>
                             <tr>

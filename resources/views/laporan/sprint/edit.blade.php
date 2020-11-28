@@ -39,7 +39,7 @@
                         <select name="mahasiswa_id" id="task" class="form-control form-control-lg">
                             @foreach($mahasiswa as $key => $name)
                             @if($report->mahasiswa->nama == $name)
-                            <option value="{{ $key }}">{{ $report->mahasiswa->nama }}</option>
+                            <option selected value="{{ $key }}">{{ $report->mahasiswa->nama }}</option>
                             @else
                             <option value="{{ $key }}">{{ $name }}</option>
                             @endif
