@@ -42,7 +42,7 @@ class LaporsprintController extends Controller
             'project_id' => $idproject,
             'sprint_id' => $request->sprint_id,
             'mahasiswa_id' => $request->mahasiswa_id,
-            'keterangan' => $request->keterangan
+            'keterangan' => $request->keterangan,
         ]);
         session()->flash('success', 'Laporan Sprint Telah Dibuat');
         return redirect()->route('laporan.sprint.index', $project->id);

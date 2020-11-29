@@ -17,7 +17,7 @@ class SprintReport extends Model
 
     public function sprintReview()
     {
-        return $this->hasOne('App\SprintReview', 'sprint_report_id');
+        return $this->belongsTo('App\SprintReview', 'sprint_reviews_id')->withDefault();
     }
 
     public function mahasiswa()

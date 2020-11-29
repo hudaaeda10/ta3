@@ -8,10 +8,10 @@ class SprintReview extends Model
 {
     protected $table = 'sprint_reviews';
 
-    protected $filable = ['review', 'status', 'sprint_report_id'];
+    protected $filable = ['review'];
 
     public function sprintReport()
     {
-        $this->belongsTo('App\SprintReport');
+        $this->hasOne('App\SprintReport');
     }
 }
