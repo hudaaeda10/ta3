@@ -50,12 +50,38 @@
                                     <span class="h6">{!! $sprints->keterangan !!}</span>
                                 </td>
                             </tr>
+                            <tr>
+                                <th scope="row">
+                                    Feedback Scrum Master
+                                </th>
+                                <td>
+                                    <span class="h6">{!! $sprints->sprintreview->review !!}</span>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
+            <form action="{{ route('laporan.sprint.feedback', $sprints->id) }}" method="post">
+                <div class="form-group row mb-4">
+                    <label for="review" class="col-form-label text-md-right col-md-1">Feedback</label>
+                    <div class="col-md-6">
+                        <textarea name="review" id="review" class="summernote-simple form-control"></textarea>
+                    </div>
+                </div>
+                <div class="form-group row mb-4">
+                    <label class="col-form-label text-md-right col-md-1"></label>
+                    <div class="col-md-6">
+                        <button class="btn btn-primary">Publish</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
 
 @stop
+
+@push('footermiddle')
+<script src="/admin/assets/modules/summernote/summernote-bs4.js"></script>
+@endpush

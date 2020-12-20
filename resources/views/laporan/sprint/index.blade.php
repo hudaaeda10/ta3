@@ -29,15 +29,13 @@
                                 <th>Nama Sprint</th>
                                 <th>Nama Mahasiswa</th>
                                 <th>Waktu Laporan</th>
-                                <th>Keterangan</th>
                                 <th>Action</th>
                             </tr>
                             @foreach($sprints as $sprint)
                             <tr>
                                 <td>{{ $sprint->sprint->nama }}</td>
                                 <td>{{ $sprint->mahasiswa->nama}}</td>
-                                <td>{{ $sprint->created_at->format('d-M-Y H:i:s') }}</td>
-                                <td>{!! Str::limit($sprint->keterangan, 100) !!}</td>
+                                <td>{{ $sprint->created_at->format('d-M-Y H:i') }}</td>
                                 <td>
                                     <a href="{{route('laporan.sprint.show', [$sprint->id, $project->id]) }}" class="btn btn-primary">Details</a>
                                     <a href="{{ route('laporan.sprint.edit', [$sprint->id, $project->id]) }}" class="btn btn-warning">Edit</a>

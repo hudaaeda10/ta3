@@ -11,8 +11,6 @@
             <li><a class="nav-link" href="{{ route('dashboard')}}"><i class="fas fa-fire"></i> <span>Dashboard</span></a></li>
             <li class="menu-header">Mahasiswa</li>
             <li><a class="nav-link" href="{{ route('project')}}"><i class="fas fa-columns"></i> <span>Projects</span></a></li>
-            <li class="menu-header">Scrum Master</li>
-            <li><a class="nav-link" href="#"><i class="far fa-file-alt"></i> <span>Laporan</span></a></li>
         </ul>
     </aside>
 </div>

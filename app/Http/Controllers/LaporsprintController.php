@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\{Project, Sprint, SprintReport, Mahasiswa};
+use App\{Project, Sprint, SprintReport, Mahasiswa, SprintReview};
 use Illuminate\Http\Request;
 
 class LaporsprintController extends Controller
@@ -42,7 +42,7 @@ class LaporsprintController extends Controller
             'project_id' => $idproject,
             'sprint_id' => $request->sprint_id,
             'mahasiswa_id' => $request->mahasiswa_id,
-            'keterangan' => $request->keterangan
+            'keterangan' => $request->keterangan,
         ]);
         session()->flash('success', 'Laporan Sprint Telah Dibuat');
         return redirect()->route('laporan.sprint.index', $project->id);
@@ -70,6 +70,18 @@ class LaporsprintController extends Controller
     public function destroy(SprintReport $sprints)
     {
         $sprints->delete();
+        return redirect()->back();
+    }
+
+    public function feedback(Request $request, $idsprint)
+    {
+        $this->validate($request, [
+            'review' => 'required',
+        ]);
+
+        SprintReview::create([
+            'review' => $request->review,
+        ]);
         return redirect()->back();
     }
 }

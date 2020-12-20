@@ -16,6 +16,7 @@ class CreateTasksTable extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
             $table->foreignId('sprint_id')->unsigned();
+            $table->foreignId('mahasiswa_id')->unsigned();
             $table->string('nama');
             $table->text('deskripsi');
             $table->boolean('status');
@@ -23,6 +24,7 @@ class CreateTasksTable extends Migration
             $table->timestamps();
 
             $table->foreign('sprint_id')->references('id')->on('sprints')->onDelete('cascade');
+            $table->foreign('mahasiswa_id')->references('id')->on('mahasiswas')->onDelete('cascade');
         });
     }
 

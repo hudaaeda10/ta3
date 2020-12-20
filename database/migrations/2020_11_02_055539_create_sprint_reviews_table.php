@@ -17,7 +17,6 @@ class CreateSprintReviewsTable extends Migration
             $table->id();
             $table->foreignId('sprint_report_id')->unsigned();
             $table->text('review');
-            $table->enum('status', ['belum', 'iya', 'tidak']);
             $table->timestamps();
 
             $table->foreign('sprint_report_id')->references('id')->on('sprint_reports')->onDelete('cascade');

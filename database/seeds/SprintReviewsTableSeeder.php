@@ -14,7 +14,6 @@ class SprintReviewsTableSeeder extends Seeder
         $sprintReviews = \App\SprintReview::create([
             'sprint_report_id' => 1,
             'review' => 'Perbaiki beberapa komponen pada task',
-            'status' => 'iya',
         ]);
     }
 }
