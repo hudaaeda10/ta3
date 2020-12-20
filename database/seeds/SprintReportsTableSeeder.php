@@ -15,7 +15,6 @@ class SprintReportsTableSeeder extends Seeder
             'sprint_id' => 1,
             'mahasiswa_id' => 1,
             'project_id' => 1,
-            'sprint_reviews_id' => 1,
             'keterangan' => 'Pekerjaan Hampir Selesai',
         ]);
     }

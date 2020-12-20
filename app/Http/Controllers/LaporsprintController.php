@@ -80,7 +80,6 @@ class LaporsprintController extends Controller
         ]);
 
         SprintReview::create([
-            'sprint_report_id' => $idsprint,
             'review' => $request->review,
         ]);
         return redirect()->back();

@@ -12,6 +12,6 @@ class SprintReview extends Model
 
     public function sprintReport()
     {
-        $this->hasOne('App\SprintReport');
+        $this->hasOne('App\SprintReport', 'sprint_report_id');
     }
 }

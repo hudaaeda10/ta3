@@ -15,8 +15,8 @@ class DatabaseSeeder extends Seeder
         $this->call(MahasiswasTableSeeder::class);
         $this->call(SprintsTableSeeder::class);
         $this->call(TasksTableSeeder::class);
-        $this->call(SprintReviewsTableSeeder::class);
         $this->call(SprintReportsTableSeeder::class);
+        $this->call(SprintReviewsTableSeeder::class);
         $this->call(DailyReportsTableSeeder::class);
     }
 }

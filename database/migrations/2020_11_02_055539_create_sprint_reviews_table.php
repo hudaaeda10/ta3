@@ -15,8 +15,11 @@ class CreateSprintReviewsTable extends Migration
     {
         Schema::create('sprint_reviews', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('sprint_report_id')->unsigned();
             $table->text('review');
             $table->timestamps();
+
+            $table->foreign('sprint_report_id')->references('id')->on('sprint_reports')->onDelete('cascade');
         });
     }
 

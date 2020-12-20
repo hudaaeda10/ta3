@@ -12,6 +12,7 @@ class SprintReviewsTableSeeder extends Seeder
     public function run()
     {
         $sprintReviews = \App\SprintReview::create([
+            'sprint_report_id' => 1,
             'review' => 'Perbaiki beberapa komponen pada task',
         ]);
     }
