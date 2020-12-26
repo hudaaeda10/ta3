@@ -13,7 +13,6 @@ class DailyReportsTableSeeder extends Seeder
     {
         $dailyReports = \App\DailyReport::create([
             'sprint_id' => 1,
-            'mahasiswa_id' => 1,
             'keterangan' => 'Pekerjaan Hampir Selesai',
         ]);
     }

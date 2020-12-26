@@ -3,45 +3,57 @@
 namespace App\Http\Controllers;
 
 use App\{Project, Sprint, SprintReport, Mahasiswa, SprintReview};
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class LaporsprintController extends Controller
 {
     public function index($idproject)
     {
-        $project = Project::findOrFail($idproject);
-        $sprints = SprintReport::with('project')->where('project_id', $idproject)->get();
-        // $sprints = Sprint::with('project')->where('project_id', $idproject)->get();
-
-        return view('laporan.sprint.index', compact('sprints', 'project'));
+        if (Gate::any(['isMahasiswa', 'isScrumMater'])) {
+            $project = Project::findOrFail($idproject);
+            $sprints = SprintReport::with('project')->where('project_id', $idproject)->get();
+            return view('laporan.sprint.index', compact('sprints', 'project'));
+        } else {
+            return abort(404);
+        }
     }
 
     public function show(SprintReport $sprints, $idproject)
     {
-        $project = Project::findOrFail($idproject);
-        return view('laporan.sprint.show', compact('sprints', 'project'));
+        if (Gate::any(['isMahasiswa', 'isScrumMater'])) {
+            $project = Project::findOrFail($idproject);
+            return view('laporan.sprint.show', compact('sprints', 'project'));
+        } else {
+            return abort(404);
+        }
     }
 
     public function create(Request $request, $idproject)
     {
-        $project = Project::findOrFail($idproject);
-        $sprints = Sprint::with('project')->where('project_id', $idproject)->get();
-        $mahasiswa = Mahasiswa::pluck('nama', 'id')->toArray();
-        return view('laporan.sprint.create', compact('project', 'mahasiswa', 'sprints'));
+        if (Gate::allows('isMahasiswa')) {
+            $project = Project::findOrFail($idproject);
+            $sprints = Sprint::with('project')->where('project_id', $idproject)->get();
+            $mahasiswa = Auth::user()->nama;
+            return view('laporan.sprint.create', compact('project', 'mahasiswa', 'sprints'));
+        } else {
+            return abort(404);
+        }
     }
 
     public function store(Request $request, $idproject)
     {
         $this->validate($request, [
             'sprint_id' => 'required',
-            'mahasiswa_id' => 'required',
         ]);
 
         $project = Project::findOrFail($idproject);
         $data = SprintReport::create([
             'project_id' => $idproject,
             'sprint_id' => $request->sprint_id,
-            'mahasiswa_id' => $request->mahasiswa_id,
+            'mahasiswa' => Auth::user()->nama,
             'keterangan' => $request->keterangan,
         ]);
         session()->flash('success', 'Laporan Sprint Telah Dibuat');
@@ -50,12 +62,14 @@ class LaporsprintController extends Controller
 
     public function edit($idsprint, $idproject)
     {
-        $project = Project::findOrFail($idproject);
-        $report = SprintReport::findOrFail($idsprint);
-        $sprints = Sprint::with('project')->where('project_id', $idproject)->get();
-        $mahasiswa = Mahasiswa::pluck('nama', 'id');
-        // dd($valueselected);
-        return view('laporan.sprint.edit', compact('report', 'project', 'sprints', 'mahasiswa'));
+        if (Gate::allows('isMahasiswa')) {
+            $project = Project::findOrFail($idproject);
+            $report = SprintReport::findOrFail($idsprint);
+            $sprints = Sprint::with('project')->where('project_id', $idproject)->get();
+            return view('laporan.sprint.edit', compact('report', 'project', 'sprints'));
+        } else {
+            return abort(404);
+        }
     }
 
     public function update(Request $request, $idreport, $idproject)
@@ -75,13 +89,17 @@ class LaporsprintController extends Controller
 
     public function feedback(Request $request, $idsprint)
     {
-        $this->validate($request, [
-            'review' => 'required',
-        ]);
+        if (Gate::allows('isScrumMater')) {
+            $this->validate($request, [
+                'review' => 'required',
+            ]);
 
-        SprintReview::create([
-            'review' => $request->review,
-        ]);
-        return redirect()->back();
+            SprintReview::create([
+                'review' => $request->review,
+            ]);
+            return redirect()->back();
+        } else {
+            return abort(404);
+        }
     }
 }

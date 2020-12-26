@@ -16,7 +16,6 @@ class TasksTableSeeder extends Seeder
         DB::table('tasks')->insert([
             [
                 'sprint_id' => 1,
-                'mahasiswa_id' => 1,
                 'nama' => 'Merancang Awal Aplikasi',
                 'deskripsi' => 'Merancang Algoritma Aplikasi',
                 'status' => 0,
@@ -26,7 +25,6 @@ class TasksTableSeeder extends Seeder
             ],
             [
                 'sprint_id' => 1,
-                'mahasiswa_id' => 1,
                 'nama' => 'Merancang Kedua Aplikasi',
                 'deskripsi' => 'Merancang Desain Aplikasi',
                 'status' => 0,

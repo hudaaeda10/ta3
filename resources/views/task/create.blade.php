@@ -26,18 +26,13 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="mahasiswa_id">Nama Mahasiswa</label>
-                        <select name="mahasiswa_id" id="task" class="form-control form-control-lg @error('mahasiswa_id') is-invalid @enderror">
+                        <label for="mahasiswa">Nama Mahasiswa</label>
+                        <select name="mahasiswa" id="task" class="form-control form-control-lg @error('mahasiswa') is-invalid @enderror">
                             <option selected disabled>Pilih Nama Mahasiswa</option>
-                            @foreach($mahasiswa as $key => $name)
-                            <option value="{{ $key }}">{{ $name }}</option>
+                            @foreach($mahasiswa as $name)
+                            <option value="{{ $name->mahasiswa->nama }}">{{ $name->mahasiswa->nama }}</option>
                             @endforeach
                         </select>
-                        @error('mahasiswa_id')
-                        <div class="text-danger">
-                            {{ $message }}
-                        </div>
-                        @enderror
                     </div>
 
                     <div class="form-group">

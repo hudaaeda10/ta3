@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\{Sprint, Task, Mahasiswa, Project};
+use App\{Sprint, Task, member_team, User, Team, Project};
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class TaskController extends Controller
 {
@@ -24,11 +25,18 @@ class TaskController extends Controller
      */
     public function create($idproject, $idsprint)
     {
-        $project = Project::findOrFail($idproject);
-        $sprint = Sprint::findOrFail($idsprint);
-        $mahasiswa = Mahasiswa::pluck('nama', 'id')->toArray();
-        $bobots = ['1', '3', '5', '7', '11'];
-        return view('task.create', compact('sprint', 'bobots', 'mahasiswa', 'project'));
+        if (Gate::allows('isMahasiswa')) {
+            $project = Project::findOrFail($idproject);
+            $sprint = Sprint::findOrFail($idsprint);
+            $team = Team::where('projects_id', $idproject)->first();
+            // dd($team->id);
+            $mahasiswa = member_team::where('team_id', $team->id)->get();
+            $bobots = ['1', '3', '5', '7', '11'];
+            // dd($mahasiswa);
+            return view('task.create', compact('sprint', 'bobots', 'mahasiswa', 'project'));
+        } else {
+            return abort(404);
+        }
     }
 
     /**
@@ -43,7 +51,7 @@ class TaskController extends Controller
         $sprint = Sprint::findOrFail($idsprint);
         $this->validate($request, [
             'sprint_id' => 'required',
-            'mahasiswa_id' => 'required',
+            'mahasiswa' => 'required',
             'nama' => 'required',
             'deskripsi' => 'required',
             'bobot' => 'required',
@@ -51,7 +59,7 @@ class TaskController extends Controller
 
         Task::create([
             'sprint_id' => $request->sprint_id,
-            'mahasiswa_id' => $request->mahasiswa_id,
+            'mahasiswa' => $request->mahasiswa,
             'nama' => $request->nama,
             'deskripsi' => $request->deskripsi,
             'status' => false,
@@ -80,14 +88,19 @@ class TaskController extends Controller
      */
     public function edit($idproject, $idsprint, $idtask)
     {
-        $project = Project::findOrFail($idproject);
-        $sprint = Sprint::findOrFail($idsprint);
-        $tugass = Sprint::with('project')->where('project_id', $idproject)->get();
-        $mahasiswa = Mahasiswa::pluck('nama', 'id')->toArray();
-        $task = Task::find($idtask);
-        $bobots = ['1', '3', '5', '7', '11'];
+        if (Gate::allows('isMahasiswa')) {
+            $project = Project::findOrFail($idproject);
+            $sprint = Sprint::findOrFail($idsprint);
+            $tugass = Sprint::with('project')->where('project_id', $idproject)->get();
+            $team = Team::where('projects_id', $idproject)->first();
+            $mahasiswa = member_team::where('team_id', $team->id)->get();
+            $task = Task::find($idtask);
+            $bobots = ['1', '3', '5', '7', '11'];
 
-        return view('task.edit', compact('tugass', 'task', 'bobots', 'mahasiswa', 'sprint', 'project'));
+            return view('task.edit', compact('tugass', 'task', 'bobots', 'mahasiswa', 'sprint', 'project'));
+        } else {
+            return abort(404);
+        }
     }
 
     /**
@@ -103,7 +116,7 @@ class TaskController extends Controller
         $sprint = Sprint::findOrFail($idsprint);
         $this->validate($request, [
             'sprint_id' => 'required',
-            'mahasiswa_id' => 'required',
+            'mahasiswa' => 'required',
             'nama' => 'required',
         ]);
 

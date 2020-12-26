@@ -13,7 +13,6 @@ class SprintReportsTableSeeder extends Seeder
     {
         $sprintReports = \App\SprintReport::create([
             'sprint_id' => 1,
-            'mahasiswa_id' => 1,
             'project_id' => 1,
             'keterangan' => 'Pekerjaan Hampir Selesai',
         ]);

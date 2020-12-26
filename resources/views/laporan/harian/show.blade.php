@@ -39,7 +39,7 @@
                                     Nama Mahasiswa
                                 </th>
                                 <td>
-                                    <span class="h6">{{ $daily->Mahasiswa->nama }}</span>
+                                    <span class="h6">{{ $daily->mahasiswa }}</span>
                                 </td>
                             </tr>
                             <tr>

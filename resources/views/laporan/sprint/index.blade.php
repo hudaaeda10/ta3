@@ -34,7 +34,7 @@
                             @foreach($sprints as $sprint)
                             <tr>
                                 <td>{{ $sprint->sprint->nama }}</td>
-                                <td>{{ $sprint->mahasiswa->nama}}</td>
+                                <td>{{ $sprint->mahasiswa}}</td>
                                 <td>{{ $sprint->created_at->format('d-M-Y H:i') }}</td>
                                 <td>
                                     <a href="{{route('laporan.sprint.show', [$sprint->id, $project->id]) }}" class="btn btn-primary">Details</a>

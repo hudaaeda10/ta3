@@ -35,24 +35,6 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="mahasiswa_id">Nama Mahasiswa</label>
-                        <select name="mahasiswa_id" id="task" class="form-control form-control-lg">
-                            @foreach($mahasiswa as $key => $name)
-                            @if($report->mahasiswa->nama == $name)
-                            <option selected value="{{ $key }}">{{ $report->mahasiswa->nama }}</option>
-                            @else
-                            <option value="{{ $key }}">{{ $name }}</option>
-                            @endif
-                            @endforeach
-                        </select>
-                        @error('mahasiswa_id')
-                        <div class="text-danger">
-                            {{ $message }}
-                        </div>
-                        @enderror
-                    </div>
-
-                    <div class="form-group">
                         <label for="keterangan">Keterangan</label>
                         <textarea name="keterangan" class="summernote form-control" id="keterangan" rows="3">{!! $report->keterangan !!}</textarea>
                         @error('keterangan')

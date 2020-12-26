@@ -39,7 +39,7 @@
                                     Nama Mahasiswa
                                 </th>
                                 <td>
-                                    <span class="h6">{{ $sprints->Mahasiswa->nama }}</span>
+                                    <span class="h6">{{ $sprints->mahasiswa }}</span>
                                 </td>
                             </tr>
                             <tr>

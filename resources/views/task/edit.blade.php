@@ -36,12 +36,8 @@
                     <div class="form-group">
                         <label for="mahasiswa_id">Nama Mahasiswa</label>
                         <select name="mahasiswa_id" id="task" class="form-control form-control-lg">
-                            @foreach($mahasiswa as $key => $name)
-                            @if($task->mahasiswa->nama == $name)
-                            <option selected value="{{ $key }}">{{ $task->mahasiswa->nama }}</option>
-                            @else
-                            <option value="{{ $key }}">{{ $name }}</option>
-                            @endif
+                            @foreach($mahasiswa as $name)
+                            <option {{ $name->mahasiswa->nama == $task->mahasiswa ? 'selected' : '' }} value="{{ $name->mahasiswa->nama }}">{{ $name->mahasiswa->nama }}</option>
                             @endforeach
                         </select>
                         @error('mahasiswa_id')

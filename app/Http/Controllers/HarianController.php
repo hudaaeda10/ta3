@@ -2,34 +2,48 @@
 
 namespace App\Http\Controllers;
 
-use App\{Sprint, dailyReport, Mahasiswa, Task, Project};
+use App\{Sprint, dailyReport, Task, Project};
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class HarianController extends Controller
 {
     public function index($idproject, $idsprint)
     {
-        $project = Project::findOrFail($idproject);
-        $sprint = Sprint::findOrFail($idsprint);
-        $dailys = dailyReport::with('sprint')->where('sprint_id', $idsprint)->get();
-        return view('laporan.harian.index', compact('sprint', 'dailys', 'project'));
+        if (Gate::any(['isMahasiswa', 'isScrumMater'])) {
+            $project = Project::findOrFail($idproject);
+            $sprint = Sprint::findOrFail($idsprint);
+            $dailys = dailyReport::with('sprint')->where('sprint_id', $idsprint)->get();
+            return view('laporan.harian.index', compact('sprint', 'dailys', 'project'));
+        } else {
+            return abort(404);
+        }
     }
 
     public function show($idproject, $idsprint, $iddaily)
     {
-        $project = Project::findOrFail($idproject);
-        $sprint = Sprint::findOrFail($idsprint);
-        $daily = DailyReport::findOrFail($iddaily);
-        return view('laporan.harian.show', compact('daily', 'project', 'sprint'));
+        if (Gate::any(['isMahasiswa', 'isScrumMater'])) {
+            $project = Project::findOrFail($idproject);
+            $sprint = Sprint::findOrFail($idsprint);
+            $daily = DailyReport::findOrFail($iddaily);
+            return view('laporan.harian.show', compact('daily', 'project', 'sprint'));
+        } else {
+            return abort(404);
+        }
     }
 
     public function create($idproject, $idsprint)
     {
-        $project = Project::findOrFail($idproject);
-        $sprint = Sprint::findOrFail($idsprint);
-        $mahasiswa = Mahasiswa::pluck('nama', 'id')->toArray();
-        $tasks = Task::with('sprint')->where('sprint_id', $idsprint)->get();
-        return view('laporan.harian.create', compact('sprint', 'mahasiswa', 'tasks', 'project'));
+        if (Gate::allows('isMahasiswa')) {
+            $project = Project::findOrFail($idproject);
+            $sprint = Sprint::findOrFail($idsprint);
+            $mahasiswa = Auth::user()->nama;
+            $tasks = Task::with('sprint')->where('sprint_id', $idsprint)->get();
+            return view('laporan.harian.create', compact('sprint', 'mahasiswa', 'tasks', 'project'));
+        } else {
+            return abort(404);
+        }
     }
 
     public function store(Request $request, $idproject, $idsprint)
@@ -38,14 +52,13 @@ class HarianController extends Controller
         $sprint = Sprint::findOrFail($idsprint);
         $this->validate($request, [
             'sprint_id' => 'required',
-            'mahasiswa_id' => 'required',
             'keterangan' => 'required',
-            'tugas' => 'required'
+            'tugas' => 'required',
         ]);
 
         dailyReport::create([
             'sprint_id' => $request->sprint_id,
-            'mahasiswa_id' => $request->mahasiswa_id,
+            'mahasiswa' => Auth::user()->nama,
             'keterangan' => $request->keterangan,
             'tugas' => $request->tugas,
         ]);
@@ -55,13 +68,16 @@ class HarianController extends Controller
 
     public function edit($idproject, $idsprint, $iddaily)
     {
-        $project = Project::findOrFail($idproject);
-        $sprint = Sprint::findOrFail($idsprint);
-        $tugass = Sprint::with('project')->where('project_id', $idproject)->get();
-        $mahasiswa = Mahasiswa::pluck('nama', 'id')->toArray();
-        $tasks = Task::with('sprint')->where('sprint_id', $idsprint)->get();
-        $daily = dailyReport::find($iddaily);
-        return view('laporan.harian.edit', compact('mahasiswa', 'tasks', 'daily', 'sprint', 'project', 'tugass'));
+        if (Gate::allows('isMahasiswa')) {
+            $project = Project::findOrFail($idproject);
+            $sprint = Sprint::findOrFail($idsprint);
+            $tugass = Sprint::with('project')->where('project_id', $idproject)->get();
+            $tasks = Task::with('sprint')->where('sprint_id', $idsprint)->get();
+            $daily = dailyReport::find($iddaily);
+            return view('laporan.harian.edit', compact('tasks', 'daily', 'sprint', 'project', 'tugass'));
+        } else {
+            return abort(404);
+        }
     }
 
     public function update(Request $request, $idproject, $idsprint, $iddaily)

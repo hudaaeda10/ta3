@@ -37,7 +37,7 @@
                             @foreach($dailys as $daily)
                             <tr>
                                 <td>{{ $daily->sprint->nama}} </td>
-                                <td>{{ $daily->mahasiswa->nama}}</td>
+                                <td>{{ $daily->mahasiswa}}</td>
                                 <td>{{$daily->tugas}}</td>
                                 <td>{{ $daily->created_at->format('d-M-Y H:i:s') }}</td>
                                 <td>{{ $daily->keterangan }}</td>

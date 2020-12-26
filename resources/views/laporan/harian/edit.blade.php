@@ -29,19 +29,6 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="mahasiswa_id">Nama Mahasiswa</label>
-                        <select name="mahasiswa_id" id="task" class="form-control form-control-lg">
-                            @foreach($mahasiswa as $key => $name)
-                            @if($daily->mahasiswa->nama == $name)
-                            <option selected value="{{ $key }}">{{ $daily->mahasiswa->nama }}</option>
-                            @else
-                            <option value="{{ $key }}">{{ $name }}</option>
-                            @endif
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="form-group">
                         <label for="tugas">Task yang dilaporkan</label>
                         <select name="tugas" id="tugas" class="form-control form-control-lg">
                             @foreach($tasks as $task)

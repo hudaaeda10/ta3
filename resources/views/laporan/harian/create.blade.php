@@ -27,12 +27,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="mahasiswa_id">Nama Mahasiswa</label>
-                        <select name="mahasiswa_id" id="task" class="form-control form-control-lg">
-                            @foreach($mahasiswa as $key => $name)
-                            <option value="{{ $key }}">{{ $name }}</option>
-                            @endforeach
-                        </select>
+                        <label for="mahasiswa">Nama Mahasiswa</label>
+                        <input name="mahasiswa" type="text" class="form-control" value="{{$mahasiswa}}" disabled>
                     </div>
 
                     <div class="form-group">

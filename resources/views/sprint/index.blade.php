@@ -46,7 +46,7 @@
                                 <th>Status</th>
                                 <th>Bobot</th>
                                 <th>Mahasiswa</th>
-                                <th>Peran</th>
+                                <th></th>
                                 <th>Action</th>
                             </tr>
                             @php $no = 1; @endphp
@@ -63,8 +63,7 @@
                                     @endif
                                 </td>
                                 <td>{{ $task->bobot }}</td>
-                                <td>{{ $task->mahasiswa->nama}}</td>
-                                <td>{{ $task->mahasiswa->peran}}</td>
+                                <td>{{ $task->mahasiswa}}</td>
                                 <td>
                                     <!-- Button trigger modal -->
                                     <a href="{{ route('task.edit', [$project->id,$sprint->id,$task->id]) }}" class="btn btn-warning">Edit</a>
