@@ -1,7 +1,15 @@
 @extends('layouts.master')
 
+@push('header')
+<link rel="stylesheet" href="/admin/assets/modules/bootstrap-daterangepicker/daterangepicker.css">
+<link rel="stylesheet" href="/admin/assets/modules/select2/dist/css/select2.min.css">
+@endpush
+
 @section('content')
 <div class="section-header">
+    <div class="section-header-back">
+        <a href="{{ route('laporan.sprint.index', $project->id) }}" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
+    </div>
     <h1>Buat Laporan Sprint</h1>
 </div>
 
@@ -10,9 +18,6 @@
         <div class="card">
             <div class="card-header">
                 <h4>Laporan Sprint Baru </h4>
-                <div class="card-header-action">
-                    <a href="{{ route('laporan.sprint.index', $project->id) }}" class="btn btn-primary">Kembali</a>
-                </div>
             </div>
             <div class="card-body">
                 <form action="{{ route('laporan.sprint.store', $project->id) }}" method="post">
@@ -21,17 +26,24 @@
                     <div class="form-group">
                         <label for="sprint_id">Judul Sprint</label>
                         <select name="sprint_id" id="sprint_id" class="form-control form-control-lg">
-                            <option disable selected> Pilih Sprint </option>
-                            @foreach($sprints as $sprint)
                             <option value="{{ $sprint->id }}">{{ $sprint->nama }}</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tugas">Task yang dilaporkan</label>
+                        <select name="tugas[]" class="form-control select2" multiple="">
+                            @foreach($tasks as $task)
+                            <option value="{{$task->nama}}">{{ $task->nama }}</option>
                             @endforeach
                         </select>
-                        @error('sprint_id')
+                        @error('tugas')
                         <div class="text-danger">
                             {{ $message }}
                         </div>
                         @enderror
                     </div>
+
                     <div class="form-group">
                         <label for="mahasiswa_id">Nama Mahasiswa</label>
                         <input name="mahasiswa" type="text" class="form-control" value="{{$mahasiswa}}" disabled>
@@ -40,6 +52,11 @@
                     <div class="form-group">
                         <label for="keterangan">Keterangan</label>
                         <textarea name="keterangan" class=" summernote form-control " id="keterangan" rows="3"></textarea>
+                        @error('keterangan')
+                        <div class="text-danger">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
 
                     <div class="card-footer">
@@ -55,4 +72,5 @@
 
 @push('footermiddle')
 <script src="/admin/assets/modules/summernote/summernote-bs4.js"></script>
+<script src="/admin/assets/modules/select2/dist/js/select2.full.min.js"></script>
 @endpush

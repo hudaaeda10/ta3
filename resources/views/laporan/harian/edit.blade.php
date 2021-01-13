@@ -2,6 +2,9 @@
 
 @section('content')
 <div class="section-header">
+    <div class="section-header-back">
+        <a href="{{ route('harian.index', [$project->id,$sprint->id]) }}" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
+    </div>
     <h1>Edit Laporan</h1>
 </div>
 
@@ -10,9 +13,6 @@
         <div class="card">
             <div class="card-header">
                 <h4>Edit Laporan Harian</h4>
-                <div class="card-header-action">
-                    <a href="{{ route('harian.index', [$project->id,$sprint->id]) }}" class="btn btn-primary">Kembali</a>
-                </div>
             </div>
             <div class="card-body">
                 <form action="{{ route('harian.update', [$project->id, $sprint->id, $daily->id]) }}" method="post">
@@ -44,6 +44,11 @@
                     <div class="form-group">
                         <label for="keterangan">Keterangan</label>
                         <textarea name="keterangan" class="form-control" id="keterangan" rows="3">{{ $daily->keterangan}}</textarea>
+                        @error('keterangan')
+                        <div class="text-danger">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
 
                     <div class="card-footer">

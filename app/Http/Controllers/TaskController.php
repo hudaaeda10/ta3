@@ -8,21 +8,7 @@ use Illuminate\Support\Facades\Gate;
 
 class TaskController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create($idproject, $idsprint)
     {
         if (Gate::allows('isMahasiswa')) {
@@ -39,12 +25,6 @@ class TaskController extends Controller
         }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request, $idproject, $idsprint)
     {
         $project = Project::findOrFail($idproject);
@@ -55,6 +35,8 @@ class TaskController extends Controller
             'nama' => 'required',
             'deskripsi' => 'required',
             'bobot' => 'required',
+            // 'tanggal_mulai' => 'required',
+            // 'tanggal-selesai' => 'required'
         ]);
 
         Task::create([
@@ -64,28 +46,13 @@ class TaskController extends Controller
             'deskripsi' => $request->deskripsi,
             'status' => false,
             'bobot' => $request->bobot,
+            'tanggal_mulai' => $request->tanggal_mulai,
+            'tanggal_selesai' => $request->tanggal_selesai,
         ]);
         session()->flash('success', 'Task Telah Dibuat');
         return redirect()->route('sprint.index', [$project, $sprint]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($idproject, $idsprint, $idtask)
     {
         if (Gate::allows('isMahasiswa')) {
@@ -103,13 +70,6 @@ class TaskController extends Controller
         }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $idproject, $idsprint, $idtask)
     {
         $project = Project::findOrFail($idproject);
@@ -118,6 +78,9 @@ class TaskController extends Controller
             'sprint_id' => 'required',
             'mahasiswa' => 'required',
             'nama' => 'required',
+            'deskripsi' => 'required',
+            // 'tanggal_mulai' => 'required',
+            // 'tanggal_selesai' => 'required'
         ]);
 
         $data = Task::find($idtask);
@@ -126,12 +89,19 @@ class TaskController extends Controller
         return redirect()->route('sprint.index', [$project, $sprint]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function status($id)
+    {
+        $task = Task::findOrFail($id);
+
+        if ($task->status == true) {
+            $ganti  = false;
+        } else {
+            $ganti = true;
+        }
+        Task::where('id', $id)->update(['status' => $ganti]);
+        return redirect()->back();
+    }
+
     public function destroy(Task $task)
     {
         $task->delete();

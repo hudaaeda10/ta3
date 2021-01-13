@@ -1,7 +1,14 @@
 @extends('layouts.master')
 
+@push('header')
+<link rel="stylesheet" href="/admin/assets/modules/select2/dist/css/select2.min.css">
+@endpush
+
 @section('content')
 <div class="section-header">
+    <div class="section-header-back">
+        <a href="{{ route('laporan.sprint.index', $project->id) }}" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
+    </div>
     <h1>Edit Laporan Sprint</h1>
 </div>
 
@@ -10,9 +17,6 @@
         <div class="card">
             <div class="card-header">
                 <h4>Edit Laporan Sprint </h4>
-                <div class="card-header-action">
-                    <a href="{{ route('laporan.sprint.index', $project->id) }}" class="btn btn-primary">Kembali</a>
-                </div>
             </div>
             <div class="card-body">
                 <form action="{{ route('laporan.sprint.update', [$report->id, $project->id]) }}" method="post">
@@ -35,8 +39,17 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="tugas">Tugas yang dilaporkan</label>
+                        <select name="tugas[]" class="form-control select2" multiple="" disabled>
+                            @foreach(explode(',', $report->tugas) as $tugass)
+                            <option selected disabled value="{{ $tugass }}">{{ $tugass }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class=" form-group">
                         <label for="keterangan">Keterangan</label>
-                        <textarea name="keterangan" class="summernote form-control" id="keterangan" rows="3">{!! $report->keterangan !!}</textarea>
+                        <textarea name="keterangan" class="summernote form-control" id="keterangan" rows="3">{{ $report->keterangan }}</textarea>
                         @error('keterangan')
                         <div class="text-danger">
                             {{ $message }}
@@ -56,4 +69,5 @@
 
 @push('footermiddle')
 <script src="/admin/assets/modules/summernote/summernote-bs4.js"></script>
+<script src="/admin/assets/modules/select2/dist/js/select2.full.min.js"></script>
 @endpush

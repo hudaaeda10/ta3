@@ -17,6 +17,7 @@ class CreateSprintReportsTable extends Migration
             $table->id();
             $table->foreignId('sprint_id')->unsigned();
             $table->foreignId('project_id')->unsigned();
+            $table->text('tugas')->nullable();
             $table->text('keterangan');
             $table->string('mahasiswa');
             $table->timestamps();

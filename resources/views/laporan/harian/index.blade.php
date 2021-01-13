@@ -2,6 +2,9 @@
 
 @section('content')
 <div class="section-header">
+    <div class="section-header-back">
+        <a href="{{ route('sprint.index', [$project->id,$sprint->id]) }}" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
+    </div>
     <h1>Laporan Harian {{ $sprint->nama }} | {{ $sprint->project->nama }}</h1>
     <div class="section-header-breadcrumb">
         <div class="breadcrumb-item"><a href="{{ route('project') }}">Project</a></div>
@@ -18,9 +21,11 @@
         <div class="card">
             <div class="card-header">
                 <h4 class="d-inline">List Laporan Harian</h4>
+                @can('isMahasiswa')
                 <div class="card-header-action">
                     <a href="{{ route('harian.create', [$project->id, $sprint->id]) }}" class="btn btn-primary">Tambah Laporan</a>
                 </div>
+                @endcan
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -40,9 +45,10 @@
                                 <td>{{ $daily->mahasiswa}}</td>
                                 <td>{{$daily->tugas}}</td>
                                 <td>{{ $daily->created_at->format('d-M-Y H:i:s') }}</td>
-                                <td>{{ $daily->keterangan }}</td>
+                                <td>{{ Str::limit($daily->keterangan, 100, '.') }}</td>
                                 <td>
                                     <a href="{{ route('harian.show', [$project->id, $sprint->id, $daily->id]) }}" class="btn btn-primary">Details</a>
+                                    @can('isMahasiswa')
                                     <a href="{{ route('harian.edit', [$project->id, $sprint->id, $daily->id]) }}" class="btn btn-warning">Edit</a>
                                     <a href="#" data-id="{{ $daily->id }}" daily-nama="{{ $daily->created_at->format('d-M-Y') }}" class="btn btn-danger swal-confirm">
                                         <form action="{{ route('harian.destroy', $daily->id) }}" id="delete{{ $daily->id }}" method="POST">
@@ -51,6 +57,7 @@
                                         </form>
                                         Delete
                                     </a>
+                                    @endcan
                                 </td>
                             </tr>
                             @endforeach

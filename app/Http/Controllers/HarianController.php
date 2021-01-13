@@ -56,7 +56,7 @@ class HarianController extends Controller
             'tugas' => 'required',
         ]);
 
-        dailyReport::create([
+        $hasil = dailyReport::create([
             'sprint_id' => $request->sprint_id,
             'mahasiswa' => Auth::user()->nama,
             'keterangan' => $request->keterangan,
@@ -85,6 +85,9 @@ class HarianController extends Controller
         $project = Project::findOrFail($idproject);
         $sprint = Sprint::findOrFail($idsprint);
         $data = dailyReport::find($iddaily);
+        $this->validate($request, [
+            'keterangan' => 'required',
+        ]);
         $data->update($request->all());
         session()->flash('success', 'Laporan Harian Telah Diedit');
         return redirect()->route('harian.index', [$project, $sprint]);
