@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMahasiswasTable extends Migration
+class CreateMemberTeamTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,16 @@ class CreateMahasiswasTable extends Migration
      */
     public function up()
     {
-        Schema::create('mahasiswas', function (Blueprint $table) {
+        Schema::create('member_team', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
-            $table->string('nim');
+            $table->foreignId('team_id')->unsigned();
+            $table->foreignId('mahasiswa_id')->unsigned();
             $table->string('peran');
+            $table->text('tanggung_jawab');
             $table->timestamps();
+
+            $table->foreign('team_id')->references('id')->on('team');
+            $table->foreign('mahasiswa_id')->references('id')->on('users');
         });
     }
 
@@ -29,6 +33,6 @@ class CreateMahasiswasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mahasiswas');
+        Schema::dropIfExists('member_team');
     }
 }

@@ -15,15 +15,16 @@ class CreateProjectsTable extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
+            $table->string('nama', 50);
             $table->text('deskripsi');
             $table->date('tanggal_mulai');
-            $table->date('tanggal_selesai');
-            $table->integer('jumlah_sprint');
-            $table->string('project_owner');
-            $table->float('budget');
-            $table->enum('status_sprint', ['yes', 'no']);
-            $table->float('persen');
+            $table->date('tanggal_akhir');
+            $table->integer('jumlah_sprint')->default(0);
+            $table->double('budget', 10, 2);
+            $table->enum('status', ['Belum', 'Proses', 'Selesai'])->default('Belum');
+            $table->double('persen', 3, 2)->default(0);
+            $table->unsignedBigInteger('product_owner_id');
+            $table->foreign('product_owner_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

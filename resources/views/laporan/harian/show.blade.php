@@ -2,6 +2,9 @@
 
 @section('content')
 <div class="section-header">
+    <div class="section-header-back">
+        <a href="{{ route('harian.index', [$project->id, $sprint->id]) }}" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
+    </div>
     <h1>Laporan Daily di Tanggal : {{ $daily->created_at->format('d-M-Y H:i:s') }}</h1>
 </div>
 
@@ -10,9 +13,6 @@
         <div class="card">
             <div class="card-header">
                 <h4 class="d-inline">Details Laporan {{ $daily->sprint->nama}}</h4>
-                <div class="card-header-action">
-                    <a href="{{ route('harian.index', [$project->id, $sprint->id]) }}" class="btn btn-primary">Kembali</a>
-                </div>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -39,7 +39,7 @@
                                     Nama Mahasiswa
                                 </th>
                                 <td>
-                                    <span class="h6">{{ $daily->Mahasiswa->nama }}</span>
+                                    <span class="h6">{{ $daily->mahasiswa }}</span>
                                 </td>
                             </tr>
                             <tr>

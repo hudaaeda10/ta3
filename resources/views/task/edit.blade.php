@@ -1,7 +1,14 @@
 @extends('layouts.master')
 
+@push('header')
+<link rel="stylesheet" href="/admin/assets/modules/bootstrap-daterangepicker/daterangepicker.css">
+@endpush
+
 @section('content')
 <div class="section-header">
+    <div class="section-header-back">
+        <a href="{{ route('sprint.index', [$project->id,$sprint->id]) }}" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
+    </div>
     <h1>Edit Task</h1>
 </div>
 
@@ -10,9 +17,6 @@
         <div class="card">
             <div class="card-header">
                 <h4>{{ $task->nama }}</h4>
-                <div class="card-header-action">
-                    <a href="{{ route('sprint.index', [$project->id,$sprint->id]) }}" class="btn btn-primary">Kembali</a>
-                </div>
             </div>
             <div class="card-body">
                 <form action="{{ route('task.update', [$project->id,$sprint->id,$task->id]) }}" method="post">
@@ -34,14 +38,10 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="mahasiswa_id">Nama Mahasiswa</label>
-                        <select name="mahasiswa_id" id="task" class="form-control form-control-lg">
-                            @foreach($mahasiswa as $key => $name)
-                            @if($task->mahasiswa->nama == $name)
-                            <option selected value="{{ $key }}">{{ $task->mahasiswa->nama }}</option>
-                            @else
-                            <option value="{{ $key }}">{{ $name }}</option>
-                            @endif
+                        <label for="mahasiswa">Nama Mahasiswa</label>
+                        <select name="mahasiswa" id="task" class="form-control form-control-lg">
+                            @foreach($mahasiswa as $name)
+                            <option {{ $name->mahasiswa->nama == $task->mahasiswa ? 'selected' : '' }} value="{{ $name->mahasiswa->nama }}">{{ $name->mahasiswa->nama }}</option>
                             @endforeach
                         </select>
                         @error('mahasiswa_id')
@@ -63,7 +63,12 @@
 
                     <div class="form-group">
                         <label for="deskripsi">Deskripsi</label>
-                        <textarea class="form-control @error('deskripsi') is-invalid @enderror" id="deskripsi" rows="3">{{ $task->deskripsi }}</textarea>
+                        <textarea name="deskripsi" id="deskripsi" class="form-control @error('deskripsi') is-invalid @enderror" id="deskripsi" rows="3">{{ $task->deskripsi }}</textarea>
+                        @error('deskripsi')
+                        <div class="text-danger">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
 
                     <div class="form-group">
@@ -81,6 +86,26 @@
                         @enderror
                     </div>
 
+                    <div class="form-group">
+                        <label for="tanggal_mulai">Tanggal Mulai</label>
+                        <input name="tanggal_mulai" type="text" class="form-control datepicker" value={{$task->tanggal_mulai}}>
+                        @error('tanggal_mulai')
+                        <div class="text-danger">
+                            {{ $message }}
+                        </div>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tanggal_selesai">Tanggal Selesai</label>
+                        <input name="tanggal_selesai" type="text" class="form-control datepicker" value={{$task->tanggal_selesai}}>
+                        @error('tanggal_selesai')
+                        <div class="text-danger">
+                            {{ $message }}
+                        </div>
+                        @enderror
+                    </div>
+
                     <div class="card-footer">
                         <button class="btn btn-primary col-md-1">Save</button>
                     </div>
@@ -92,3 +117,9 @@
 </div>
 
 @stop
+
+
+@push('footermiddle')
+<script src="/admin/assets/modules/cleave-js/dist/cleave.min.js"></script>
+<script src="/admin/assets/modules/bootstrap-daterangepicker/daterangepicker.js"></script>
+@endpush

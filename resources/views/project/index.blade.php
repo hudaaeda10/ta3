@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="section-header">
-    <h1>List Project</h1>
+    <h1>Project</h1>
     <div class="section-header-breadcrumb">
         <div class="breadcrumb-item active"><a href="{{ route('project') }}">Project</a></div>
     </div>

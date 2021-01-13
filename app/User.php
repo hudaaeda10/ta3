@@ -28,12 +28,13 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    public function teams()
+    {
+        return $this->hasMany(Team::class, 'scrum_master_id', 'id');
+    }
+
+    public function mahasiswas()
+    {
+        return $this->hasMany(MemberTeam::class, 'mahasiswa_id', 'id');
+    }
 }

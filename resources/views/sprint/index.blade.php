@@ -2,6 +2,9 @@
 
 @section('content')
 <div class="section-header">
+    <div class="section-header-back">
+        <a href="{{ route('project.index', [$project->id]) }}" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
+    </div>
     <h1>List Sprint</h1>
     <div class="section-header-breadcrumb">
         <div class="breadcrumb-item"><a href="{{ route('project') }}">Project</a></div>
@@ -18,18 +21,17 @@
             <div class="card-header">
                 <h4>{{ $sprint->nama }} - Task</h4>
                 <div class="card-header-form">
-                    <form>
-                        <div class="input-group">
-                            <div class="group-btn">
-                                <a href="{{route('harian.index',[$project->id, $sprint->id])}}" class="btn btn-warning">Laporan Harian </a>
-                                <a href="{{ route('task.create', [$project->id, $sprint->id])}}" class="btn btn-primary">Tambah Task</a>
-                            </div>
-                            <input type="text" class="form-control" placeholder="Search">
-                            <div class="input-group-btn">
-                                <button class="btn btn-primary"><i class="fas fa-search"></i></button>
-                            </div>
+                    <div class="input-group">
+                        <div class="group-btn">
+                            @canany(['isMahasiswa', 'isScrumMater'])
+                            <a href="{{ route('laporan.sprint.create', [$project->id, $sprint->id]) }}" class="btn btn-success">Tambah Laporan Sprint</a>
+                            <a href="{{route('harian.index',[$project->id, $sprint->id])}}" class="btn btn-warning">Laporan Harian </a>
+                            @endcanany
+                            @can('isMahasiswa')
+                            <a href="{{ route('task.create', [$project->id, $sprint->id])}}" class="btn btn-primary">Tambah Task</a>
+                            @endcan
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
             <div class="progress">
@@ -46,25 +48,30 @@
                                 <th>Status</th>
                                 <th>Bobot</th>
                                 <th>Mahasiswa</th>
-                                <th>Peran</th>
+                                <th>Tanggal Mulai</th>
+                                <th>Tanggal selesai</th>
+                                @can('isMahasiswa')
                                 <th>Action</th>
+                                @endcan
                             </tr>
                             @php $no = 1; @endphp
                             @foreach($tasks as $task)
                             <tr>
                                 <td>{{ $no++ }}</td>
                                 <td>{{ $task->nama}}</td>
-                                <td>{{ $task->deskripsi }}</td>
+                                <td>{{ Str::limit($task->deskripsi, 50, '.') }}</td>
                                 <td>
                                     @if ($task->status == 0)
-                                    <span class="badge badge-warning">Belum divalidasi</span>
+                                    <a href="{{ url('task/status/'.$task->id) }}" class="badge badge-warning">Belum divalidasi</a>
                                     @elseif ($task->status == 1)
-                                    <div class="badge badge-success">Validasi Sukses</div>
+                                    <a href="{{ url('task/status/'.$task->id) }}" class="badge badge-success">Validasi Sukses</a>
                                     @endif
                                 </td>
                                 <td>{{ $task->bobot }}</td>
-                                <td>{{ $task->mahasiswa->nama}}</td>
-                                <td>{{ $task->mahasiswa->peran}}</td>
+                                <td>{{ $task->mahasiswa}}</td>
+                                <td>{{ $task->tanggal_mulai }}</td>
+                                <td>{{ $task->tanggal_selesai }}</td>
+                                @can('isMahasiswa')
                                 <td>
                                     <!-- Button trigger modal -->
                                     <a href="{{ route('task.edit', [$project->id,$sprint->id,$task->id]) }}" class="btn btn-warning">Edit</a>
@@ -75,6 +82,7 @@
                                         </form>
                                         Delete
                                     </a>
+                                    @endcan
                                 </td>
                             </tr>
                             @endforeach

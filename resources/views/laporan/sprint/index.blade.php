@@ -2,6 +2,9 @@
 
 @section('content')
 <div class="section-header">
+    <div class="section-header-back">
+        <a href="{{ route('project.index', $project->id) }}" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
+    </div>
     <h1>Laporan Sprint</h1>
     <div class="section-header-breadcrumb">
         <div class="breadcrumb-item"><a href="{{ route('project') }}">Project</a></div>
@@ -17,9 +20,6 @@
         <div class="card">
             <div class="card-header">
                 <h4 class="d-inline">Project {{ $project->nama }}</h4>
-                <div class="card-header-action">
-                    <a href="{{ route('laporan.sprint.create', $project->id) }}" class="btn btn-primary">Tambah Laporan Sprint</a>
-                </div>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -28,17 +28,26 @@
                             <tr>
                                 <th>Nama Sprint</th>
                                 <th>Nama Mahasiswa</th>
+                                <th>Tugas Yang dilaporkan</th>
                                 <th>Waktu Laporan</th>
                                 <th>Action</th>
                             </tr>
                             @foreach($sprints as $sprint)
                             <tr>
                                 <td>{{ $sprint->sprint->nama }}</td>
-                                <td>{{ $sprint->mahasiswa->nama}}</td>
+                                <td>{{ $sprint->mahasiswa}}</td>
+                                <td>
+                                    <ul>
+                                        @foreach(explode(',', $sprint->tugas) as $task)
+                                        <li>{{ $task }}</li>
+                                        @endforeach
+                                    </ul>
+                                </td>
                                 <td>{{ $sprint->created_at->format('d-M-Y H:i') }}</td>
                                 <td>
                                     <a href="{{route('laporan.sprint.show', [$sprint->id, $project->id]) }}" class="btn btn-primary">Details</a>
-                                    <a href="{{ route('laporan.sprint.edit', [$sprint->id, $project->id]) }}" class="btn btn-warning">Edit</a>
+                                    @can('isMahasiswa')
+                                    <a href="{{ route('laporan.sprint.edit', [$sprint->id, $project->id, $sprint->sprint_id]) }}" class="btn btn-warning">Edit</a>
                                     <a href="#" data-id="{{ $sprint->id }}" sprint-nama="{{ $sprint->created_at }}" class="btn btn-danger swal-confirm">
                                         <form action="{{ route('laporan.sprint.destroy', $sprint->id) }}" id="delete{{ $sprint->id }}" method="POST">
                                             @csrf
@@ -46,6 +55,7 @@
                                         </form>
                                         Delete
                                     </a>
+                                    @endcan
                                 </td>
                             </tr>
                             @endforeach
